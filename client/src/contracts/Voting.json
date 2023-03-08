@@ -19771,10 +19771,16 @@
       "links": {},
       "address": "0x8ead536B61b58Cd3245761Bc0b0B0fE222c976f3",
       "transactionHash": "0xff1f21a477d045476bd56a8de0d1b47ce4854e181072071da193cb6e63d04f39"
+    },
+    "1678312988080": {
+      "events": {},
+      "links": {},
+      "address": "0xC5FEAc320e98b9a8f2cEe454aA85aa5c59257F69",
+      "transactionHash": "0x8c75a7087494fa41d021f38321961c0f965bc554f1825b8e50af34eb404389d4"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-03-08T19:47:37.034Z",
+  "updatedAt": "2023-03-08T22:05:23.281Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Cyril Castagnet",

@@ -1,37 +1,12 @@
 import { useRef, useEffect } from "react";
 
-function Contract({ value }) {
+function Contract({ value, workflowStatus }) {
   const spanEle = useRef(null);
-
-  useEffect(() => {
-    spanEle.current.classList.add("flash");
-    const flash = setTimeout(() => {
-      spanEle.current.classList.remove("flash");
-    }, 300);
-    return () => {
-      clearTimeout(flash);
-    };
-  }, [value]);
 
   return (
     <code>
-      {`contract Voting {
-  uint256 value = `}
-
-      <span className="secondary-color" ref={spanEle}>
-        <strong>{value}</strong>
-      </span>
-
-      {`;
-
-  function read() public view returns (uint256) {
-    return value;
-  }
-
-  function write(uint256 newValue) public {
-    value = newValue;
-  }
-}`}
+        <p>{value}</p>
+        <p>{workflowStatus}</p>
     </code>
   );
 }
