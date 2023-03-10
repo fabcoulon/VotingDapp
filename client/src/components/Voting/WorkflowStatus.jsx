@@ -37,12 +37,44 @@ import { VotingContext } from "../../contexts/VotingContext/VotingContext";
     await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
     readStatus();
   };
+
+  const endProposalsRegistering = async () => {
+    await contract.methods.endProposalsRegistering().send({ from: accounts[0] });
+    readStatus();
+  };
+
+  const startVotingSession = async () => {
+    await contract.methods.startVotingSession().send({ from: accounts[0] });
+    readStatus();
+  };
+
+  const endVotingSession = async () => {
+    await contract.methods.endVotingSession().send({ from: accounts[0] });
+    readStatus();
+  };
+
+  const tallyVotes = async () => {
+    await contract.methods.tallyVotes().send({ from: accounts[0] });
+    readStatus();
+  };
   
   return (
     <div className="btns">
   
       <button onClick={startProposalsRegistering}>
       startProposalsRegistering()
+      </button>
+      <button onClick={endProposalsRegistering}>
+      endProposalsRegistering()
+      </button>
+      <button onClick={startVotingSession}>
+      startVotingSession()
+      </button>
+      <button onClick={endVotingSession}>
+      endVotingSession()
+      </button>
+      <button onClick={tallyVotes}>
+      tallyVotes()
       </button>
   
     </div>
