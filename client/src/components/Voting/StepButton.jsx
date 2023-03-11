@@ -2,7 +2,7 @@ import useEth from "../../contexts/EthContext/useEth";
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 
-function Button(){
+function StepButton(){
     
 const { state: { contract, accounts } } = useEth();
 let {setWorkflowStatus,value} = useContext(VotingContext);
@@ -48,4 +48,4 @@ switch (parseInt(value)) {
         }
 }
 
-export default Button;
+export default StepButton;
