@@ -5,10 +5,7 @@ function Contract({ value }) {
 const {workflowStatus} = useContext(VotingContext);
 
   return (
-    <code>
-        <p>{value}</p>
-        <p>{workflowStatus}</p>
-    </code>
+      <p>{workflowStatus}</p>
   );
 }
 

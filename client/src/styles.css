@@ -103,6 +103,10 @@ hr {
   display: flex;
 }
 
+#App .container .voting .contract-container p{
+  justify-content: center;
+}
+
 #App .container .voting .contract-container code {
   min-width: 42rem;
   border-radius: 1rem 0 0 1rem;
