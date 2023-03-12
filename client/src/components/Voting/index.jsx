@@ -8,7 +8,7 @@ import VotingButton from "./WorkflowStatus";
 import Address from "./Address";
 import StepButton from "./StepButton";
 import VotingInput from "./VotingInput";
-import InfoGetter from "../InfoGetter";
+import InfoGetter from "./InfoGetter";
 
 function Voting() {
   const { state } = useEth();
@@ -18,6 +18,7 @@ function Voting() {
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
   const [owner, setOwner] = useState("");
+  const [isOwner, setIsOwner] = useState(false);
   const voting =
     <>
       <div className="contract-container">
@@ -26,7 +27,7 @@ function Voting() {
       <InfoGetter type="proposal"/>
       </div>
       <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,value,setValue,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner}} >
+      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,value,setValue,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner,setIsOwner,isOwner}} >
         <Contract/>
         <StepButton />
         <Address />
