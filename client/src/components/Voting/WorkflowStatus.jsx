@@ -5,19 +5,19 @@ import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 function WorkflowStatus() {
 const { state: { contract } } = useEth();
 
-let {setWorkflowStatus,value,setValue} = useContext(VotingContext);
+let {setWorkflowStatus,workflowstep,setWorkflowStep} = useContext(VotingContext);
 
 useEffect(() => {
 async function getValue() {
-    setValue(await contract.methods.workflowStatus().call());
+    setWorkflowStep(await contract.methods.workflowStatus().call());
   }
   getValue();
-  },[contract.methods,setValue]);
+  },[contract.methods,setWorkflowStep]);
   
 useEffect(() => {
 
 async function getworkflowStatus() {
-    switch(parseInt(value)){
+    switch(parseInt(workflowstep)){
         case 0 : setWorkflowStatus("Registering voters");
         break;
         case 1 : setWorkflowStatus("Proposals registration started");
@@ -35,7 +35,7 @@ async function getworkflowStatus() {
         
     }
     getworkflowStatus();
-    },[value,setWorkflowStatus]);
+    },[workflowstep,setWorkflowStatus]);
 }
 
 export default WorkflowStatus;

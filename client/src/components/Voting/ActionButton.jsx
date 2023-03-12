@@ -1,11 +1,14 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
+import {UseIsOwner} from "../../hooks/useIsOwner";
 
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
-let {value,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,owner} = useContext(VotingContext);
+let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,owner,isOwner} = useContext(VotingContext);
+
+UseIsOwner(accounts[0]);
 
 const addVoter = async () => {
   alert(owner)
@@ -27,9 +30,9 @@ const addVoter = async () => {
     changeVote("");
   };
 
-switch (parseInt(value)) {
+switch (parseInt(workflowstep)) {
         case 0:
-            return <button onClick={addVoter} >Add voter</button>
+            return isOwner&&<button onClick={addVoter} >Add voter</button>
         case 1:
             return <button onClick={addProposal} >Add proposal</button>
         case 3:

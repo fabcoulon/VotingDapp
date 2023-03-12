@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import useEth from "../../contexts/EthContext/useEth";
 
 function InfoGetter({type}) {
 
 const { state: { contract, accounts,web3 } } = useEth();
+const workflowstep = useContext(VotingContext);
+
 const [address,setAddress] = useState("");
 const [proposal,setProposal] = useState("");
 
@@ -35,21 +38,21 @@ setProposal("");
 };
 
   return (
-        type === "voter" ?(
-        <div>      
+        (type === "voter") ?(
+            workflowstep > 0 ? (<div>      
             <input type="text" placeholder="address" value={address} onChange={handleAddressChange}/>
             <button onClick={getVoter} >
             get voter
             </button>    
-        </div>
+        </div>) : <></>
         ):
         ( 
-        <div>
+        workflowstep > 2 ? (<div>
             <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
             <button onClick={getOneProposal} >
             get one propoal
             </button>
-        </div>     
+        </div>) : <></>     
         )
     )
 }

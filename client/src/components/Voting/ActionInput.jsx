@@ -1,9 +1,14 @@
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
+import useEth from "../../contexts/EthContext/useEth";
+import {UseIsOwner} from "../../hooks/useIsOwner";
 
 function ActionInput(){
     
-let {value,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
+let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isOwner} = useContext(VotingContext);
+const { state: {accounts } } = useEth();
+
+UseIsOwner(accounts[0]);
 
 const handleProposalChange = e => {
   setProposal(e.target.value);
@@ -19,9 +24,9 @@ const handleVoteChange = e => {
   }
 };
 
-switch (parseInt(value)) {
+switch (parseInt(workflowstep)) {
         case 0:
-            return <input type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
+            return isOwner&&<input type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
         case 1:
             return <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
         case 3:

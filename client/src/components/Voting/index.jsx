@@ -13,7 +13,7 @@ import InfoGetter from "./InfoGetter";
 function Voting() {
   const { state } = useEth();
   const [ workflowStatus, setWorkflowStatus ] = useState("Registering voters");
-  const [value,setValue] = useState(0);
+  const [workflowstep,setWorkflowStep] = useState(0);
   const [proposal, setProposal] = useState("");
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
@@ -27,7 +27,7 @@ function Voting() {
       <InfoGetter type="proposal"/>
       </div>
       <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,value,setValue,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner,setIsOwner,isOwner}} >
+      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,workflowstep,setWorkflowStep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner,setIsOwner,isOwner}} >
         <Contract/>
         <StepButton />
         <Address />
