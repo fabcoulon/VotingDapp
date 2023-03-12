@@ -8,7 +8,6 @@ const { state: { contract } } = useEth();
 let {setWorkflowStatus,value,setValue} = useContext(VotingContext);
 
 useEffect(() => {
-
 async function getValue() {
     setValue(await contract.methods.workflowStatus().call());
   }

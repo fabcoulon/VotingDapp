@@ -17,7 +17,7 @@ function Voting() {
   const [proposal, setProposal] = useState("");
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
-
+  const [owner, setOwner] = useState("");
   const voting =
     <>
       <div className="contract-container">
@@ -26,7 +26,7 @@ function Voting() {
       <InfoGetter type="proposal"/>
       </div>
       <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,value,setValue,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
+      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,value,setValue,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner}} >
         <Contract/>
         <StepButton />
         <Address />

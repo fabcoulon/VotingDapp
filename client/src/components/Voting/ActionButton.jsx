@@ -5,9 +5,10 @@ import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
-let {value,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
+let {value,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,owner} = useContext(VotingContext);
 
 const addVoter = async () => {
+  alert(owner)
     if (!web3.utils.isAddress(voterAddress)) {
       alert("invalid address")
     }

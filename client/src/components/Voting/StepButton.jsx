@@ -3,9 +3,11 @@ import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 
 function StepButton(){
-    
+
 const { state: { contract, accounts } } = useEth();
-let {setWorkflowStatus,value} = useContext(VotingContext);
+const {setWorkflowStatus,value} = useContext(VotingContext);
+
+// await contract.methods.owner().call({ from: accounts[0] });
 
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
