@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import useEth from "../../contexts/EthContext/useEth";
-import {UseIsOwner} from "../../hooks/useIsOwner";
+import {UseIsOwner} from "../../hooks/UseIsOwner";
 
 function ActionInput(){
     

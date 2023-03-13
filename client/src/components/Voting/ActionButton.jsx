@@ -1,7 +1,7 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useEffect, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import {UseIsOwner} from "../../hooks/useIsOwner";
+import {UseIsOwner} from "../../hooks/UseIsOwner";
 
 function ActionButton(){
     
@@ -21,6 +21,7 @@ useEffect(() => {
 
   contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0] === voterAddress) && setIsRegistred(true));
 
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [voterAddress]);
 
   const addVoter = async () => {
