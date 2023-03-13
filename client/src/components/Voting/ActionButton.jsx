@@ -1,22 +1,43 @@
 import useEth from "../../contexts/EthContext/useEth";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import {UseIsOwner} from "../../hooks/useIsOwner";
 
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
-let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,owner,isOwner} = useContext(VotingContext);
+let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isOwner,setIsRegistred,isRegistred} = useContext(VotingContext);
 
 UseIsOwner(accounts[0]);
 
-const addVoter = async () => {
-  alert(owner)
-    if (!web3.utils.isAddress(voterAddress)) {
-      alert("invalid address")
-    }
-    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+useEffect(() => {
+
+  const options = {
+    filter: {
+      value: [],
+    },
+    fromBlock: 0,
+  };
+
+  contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0] === voterAddress) && setIsRegistred(true));
+
+}, [voterAddress]);
+
+  const addVoter = async () => {
+
+    setIsRegistred(false);
     setVoterAddress("");
+
+    if (!web3.utils.isAddress(voterAddress)) {
+      return alert("invalid address")
+    }
+
+    if(isRegistred) {
+      return alert("Voter already registred");
+    }
+
+    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+
   };
 
   const addProposal = async () => {
