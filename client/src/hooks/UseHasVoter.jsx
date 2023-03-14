@@ -1,10 +1,10 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
-export function UseHasVoter() {
+export function UseHasVoter(voterAddress) {
 
   const { state: { contract } } = useEth();
-  const {hasVoter,setHasVoter} = useState(false);
+  const [hasVoter,setHasVoter] = useState(false);
 
   useEffect(() => {
   
@@ -17,12 +17,12 @@ export function UseHasVoter() {
       fromBlock: 0,
     };
   
-    contract.events.VoterRegistered(options).on("data",event => event.returnValues[0] && setHasVoter(true));
+    contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0]) && setHasVoter(true));
 
   }
   fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [voterAddress])
   
   return { hasVoter }
   

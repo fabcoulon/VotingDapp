@@ -3,15 +3,17 @@ import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
+import { UseHasVoter } from "../../hooks/UseHasVoter";
 
 function StepButton(){
 
 const { state: { contract, accounts } } = useEth();
 const { workflowStatus, setWorkflowStatus } = useContext(VotingContext);
 
-const { workflowstep } = UseWorkflowStep(workflowStatus);
+const { workflowstep,voterAddress } = UseWorkflowStep(workflowStatus);
 
 const { isOwner } = UseIsOwner(accounts[0]);
+const { hasVoter } = UseHasVoter(voterAddress);
 
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
@@ -40,7 +42,7 @@ setWorkflowStatus("Voting session ended");
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
+            return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
         case 1:
             return isOwner&&<button onClick={endProposalsRegistering}>endProposalsRegistering()</button>;
         case 2:

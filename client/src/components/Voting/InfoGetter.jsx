@@ -1,20 +1,19 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useState, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-// import { UseHasVoter } from "../../hooks/UseHasVoter";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
+import { UseHasVoter } from "../../hooks/UseHasVoter";
 
 function InfoGetter({type}) {
 
 const { state: { contract, accounts,web3 } } = useEth();
-const {workflowStatus} =  useContext(VotingContext);
+const {workflowStatus,voterAddress} =  useContext(VotingContext);
 
 const [address,setAddress] = useState("");
 const [proposal,setProposal] = useState("");
 
-// const { hasVoter } = UseHasVoter;
-
 const { workflowstep } = UseWorkflowStep(workflowStatus);
+const { hasVoter } = UseHasVoter(voterAddress);
 
 const getVoter = async () => {
     if (!web3.utils.isAddress(address)) {
@@ -45,7 +44,7 @@ setProposal("");
 
   return (
         (type === "voter") ?(
-            (workflowstep && workflowstep > 0 ) ? (<div>      
+            (hasVoter) ? (<div>      
             <input type="text" placeholder="address" value={address} onChange={handleAddressChange}/>
             <button onClick={getVoter} >
             get voter
