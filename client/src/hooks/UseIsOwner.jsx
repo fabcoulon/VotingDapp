@@ -1,17 +1,24 @@
-import { VotingContext } from '../contexts/VotingContext/VotingContext';
 import useEth from '../contexts/EthContext/useEth';
-import { useContext } from 'react';
+import { useState, useEffect } from 'react';
 
-const UseIsOwner = async (account) => {
+export function UseIsOwner(account) {
 
-  const {owner,setOwner,setIsOwner,isOwner} = useContext(VotingContext);
-  const { state: { contract } } = useEth();
+  const [isOwner, setIsOwner] = useState(false);
+  const { state: { contract,accounts } } = useEth();
+  const [owner, setOwner] = useState(accounts[0]);
 
-  setOwner(await contract.methods.owner().call());
-
-  setIsOwner(owner === account);
-
-  return isOwner;
-}
-
-export {UseIsOwner}
+  useEffect(() => {
+  
+  if (!account) return
+  
+  async function fetchData() { 
+    setOwner(await contract.methods.owner().call());
+    setIsOwner(owner === account);
+  }
+  fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account])
+  
+  return { isOwner }
+  
+  }

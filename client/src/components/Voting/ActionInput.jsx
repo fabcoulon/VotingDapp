@@ -1,14 +1,17 @@
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import useEth from "../../contexts/EthContext/useEth";
-import {UseIsOwner} from "../../hooks/UseIsOwner";
+import { UseIsOwner } from "../../hooks/UseIsOwner";
+import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 
 function ActionInput(){
     
-let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isOwner} = useContext(VotingContext);
+let {workflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
 const { state: {accounts } } = useEth();
 
-UseIsOwner(accounts[0]);
+const { isOwner } = UseIsOwner(accounts[0]);
+
+const { workflowstep } = UseWorkflowStep(workflowStatus);
 
 const handleProposalChange = e => {
   setProposal(e.target.value);

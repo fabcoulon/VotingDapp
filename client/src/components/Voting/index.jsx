@@ -13,23 +13,19 @@ import InfoGetter from "./InfoGetter";
 function Voting() {
   const { state } = useEth();
   const [ workflowStatus, setWorkflowStatus ] = useState("Registering voters");
-  const [workflowstep,setWorkflowStep] = useState(0);
   const [proposal, setProposal] = useState("");
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
-  const [owner, setOwner] = useState("");
-  const [isOwner, setIsOwner] = useState(false);
   const [isRegistred, setIsRegistred] = useState(false);
-  const [hasVoters,setHasVoters] = useState(false);
   const voting =
     <>
       <div className="contract-container">
       <div>
-      <InfoGetter type="voter"/>
-      <InfoGetter type="proposal"/>
-      </div>
-      <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,workflowstep,setWorkflowStep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setOwner,owner,setIsOwner,isOwner,isRegistred,setIsRegistred,hasVoters,setHasVoters}} >
+      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isRegistred,setIsRegistred}} >
+        <div>
+        <InfoGetter type="voter"/>
+        <InfoGetter type="proposal"/>
+        </div>
         <Contract/>
         <StepButton />
         <Address />

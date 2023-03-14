@@ -1,14 +1,17 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import {UseIsOwner} from "../../hooks/UseIsOwner";
+import { UseIsOwner } from "../../hooks/UseIsOwner";
+import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 
 function StepButton(){
 
 const { state: { contract, accounts } } = useEth();
-const {setWorkflowStatus,workflowstep,isOwner} = useContext(VotingContext);
+const { workflowStatus, setWorkflowStatus } = useContext(VotingContext);
 
-UseIsOwner(accounts[0]);
+const { workflowstep } = UseWorkflowStep(workflowStatus);
+
+const { isOwner } = UseIsOwner(accounts[0]);
 
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });

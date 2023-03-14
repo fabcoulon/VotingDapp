@@ -1,18 +1,12 @@
 import { useEffect,useContext } from "react";
-import useEth from "../../contexts/EthContext/useEth";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
+import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 
 function WorkflowStatus() {
-const { state: { contract } } = useEth();
 
-let {setWorkflowStatus,workflowstep,setWorkflowStep} = useContext(VotingContext);
+let {setWorkflowStatus,workflowStatus} = useContext(VotingContext);
 
-useEffect(() => {
-async function getValue() {
-    setWorkflowStep(await contract.methods.workflowStatus().call());
-  }
-  getValue();
-  },[contract.methods,setWorkflowStep]);
+const { workflowstep } = UseWorkflowStep(workflowStatus);
   
 useEffect(() => {
 

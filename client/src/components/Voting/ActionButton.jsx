@@ -1,14 +1,17 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useEffect, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import {UseIsOwner} from "../../hooks/UseIsOwner";
+import { UseIsOwner } from "../../hooks/UseIsOwner";
+import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
-let {workflowstep,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isOwner,setIsRegistred,isRegistred} = useContext(VotingContext);
+let {workflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setIsRegistred,isRegistred} = useContext(VotingContext);
 
-UseIsOwner(accounts[0]);
+const { isOwner } = UseIsOwner(accounts[0]);
+
+const { workflowstep } = UseWorkflowStep(workflowStatus);
 
 useEffect(() => {
 
