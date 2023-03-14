@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
+import { UseIsVoter } from "../../hooks/UseIsVoter";
 
 function ActionButton(){
     
@@ -12,6 +13,7 @@ let {workflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,chang
 const { isOwner } = UseIsOwner(accounts[0]);
 
 const { workflowstep } = UseWorkflowStep(workflowStatus);
+const {isVoter} = UseIsVoter(accounts[0]);
 
 useEffect(() => {
 
@@ -45,6 +47,10 @@ useEffect(() => {
   };
 
   const addProposal = async () => {
+    if (proposal === "") {
+      alert("No empty proposal please.");
+      return;
+    }
     await contract.methods.addProposal(proposal).send({ from: accounts[0] });
     setProposal("");
   };
@@ -59,7 +65,7 @@ switch (parseInt(workflowstep)) {
         case 0:
             return isOwner&&<button onClick={addVoter} >Add voter</button>
         case 1:
-            return <button onClick={addProposal} >Add proposal</button>
+            return isVoter&&<button onClick={addProposal} >Add proposal</button>
         case 3:
             return <button onClick={setVote} >Vote for proposal</button>
         default:
