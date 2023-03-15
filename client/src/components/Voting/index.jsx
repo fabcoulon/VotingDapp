@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import useEth from "../../contexts/EthContext/useEth";
-import Contract from "./Contract";
+import Display from "./Display";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
@@ -25,7 +25,7 @@ function Voting() {
         <InfoGetter type="voter"/>
         <InfoGetter type="proposal"/>
         </div>
-        <Contract/>
+        <Display/>
         <Winner/>
         <StepButton />
         <Address />

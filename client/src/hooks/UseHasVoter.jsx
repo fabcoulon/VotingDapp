@@ -17,7 +17,7 @@ export function UseHasVoter(voterAddress) {
       fromBlock: 0,
     };
   
-    contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0]) && setHasVoter(true));
+await contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0]) && setHasVoter(true));
 
   }
   fetchData();

@@ -40,7 +40,7 @@ const tallyVotes = async () => {
 await contract.methods.tallyVotes().send({ from: accounts[0] });
 setWorkflowStatus("Votes tallied");
 };
-alert(workflowstep);
+
 switch (parseInt(workflowstep)) {
         case 0:
             return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;

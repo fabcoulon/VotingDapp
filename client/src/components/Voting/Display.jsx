@@ -1,7 +1,7 @@
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
 
-function Contract() {
+function Display() {
 
 const { workflowstep } = UseWorkflowStep();
 const {workflowStatus} = UseWorkflowStatus(workflowstep);
@@ -14,4 +14,4 @@ const {workflowStatus} = UseWorkflowStatus(workflowstep);
   );
 }
 
-export default Contract;
+export default Display;
