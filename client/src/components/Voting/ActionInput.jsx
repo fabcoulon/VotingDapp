@@ -7,12 +7,13 @@ import { UseIsVoter } from "../../hooks/UseIsVoter";
 
 function ActionInput(){
     
-let {workflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
+let {proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
+
 const { state: {accounts } } = useEth();
 
 const { isOwner } = UseIsOwner(accounts[0]);
 
-const { workflowstep } = UseWorkflowStep(workflowStatus);
+const { workflowstep } = UseWorkflowStep();
 const {isVoter} = UseIsVoter(accounts[0]);
 
 const handleProposalChange = e => {

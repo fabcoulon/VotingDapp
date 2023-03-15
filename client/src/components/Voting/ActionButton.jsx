@@ -1,19 +1,25 @@
 import useEth from "../../contexts/EthContext/useEth";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { UseHasVoted } from "../../hooks/UseHasVoted";
+import { UseIsProposal } from "../../hooks/UseIsProposal";
 
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
-let {workflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,setIsRegistred,isRegistred} = useContext(VotingContext);
+let {proposal,setProposal,voterAddress,setVoterAddress,vote} = useContext(VotingContext);
 
 const { isOwner } = UseIsOwner(accounts[0]);
 
-const { workflowstep } = UseWorkflowStep(workflowStatus);
+const [isRegistred,setIsRegistred] = useState(false);
+
+const { workflowstep } = UseWorkflowStep();
 const {isVoter} = UseIsVoter(accounts[0]);
+const {hasVoted} = UseHasVoted(accounts[0]);
+const {isProposal} = UseIsProposal(vote);
 
 useEffect(() => {
 
@@ -48,17 +54,24 @@ useEffect(() => {
 
   const addProposal = async () => {
     if (proposal === "") {
-      alert("No empty proposal please.");
-      return;
+      return alert("No empty proposal please.");
+
     }
     await contract.methods.addProposal(proposal).send({ from: accounts[0] });
     setProposal("");
   };
 
   const setVote = async () => {
+    if(hasVoted){
+      return alert("You have already voted");
+
+    }
+    else if(!isProposal) {
+      return alert("Proposal not found");
+    } 
   const value = web3.utils.toBN(parseInt(vote));
     await contract.methods.setVote(value).send({ from: accounts[0] });
-    changeVote("");
+    setVote("");
   };
 
 switch (parseInt(workflowstep)) {

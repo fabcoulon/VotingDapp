@@ -3,26 +3,26 @@ import { useState, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseHasVoter } from "../../hooks/UseHasVoter";
+import { UseHasProposal } from "../../hooks/UseHasProposal";
 
 function InfoGetter({type}) {
 
 const { state: { contract, accounts,web3 } } = useEth();
-const {workflowStatus,voterAddress} =  useContext(VotingContext);
+const {voterAddress} =  useContext(VotingContext);
 
 const [address,setAddress] = useState("");
 const [proposal,setProposal] = useState("");
 
-const { workflowstep } = UseWorkflowStep(workflowStatus);
+const { workflowstep } = UseWorkflowStep();
 const { hasVoter } = UseHasVoter(voterAddress);
+const { hasProposal } = UseHasProposal(proposal);
 
 const getVoter = async () => {
     if (!web3.utils.isAddress(address)) {
         alert("invalid address")
     }
 
-    const voter = await contract.methods.getVoter(address).call({ from: accounts[0] });
-    alert(voter);
-    setAddress("");
+    alert(await contract.methods.getVoter(address).call({ from: accounts[0] }));
 };
 
 const handleAddressChange = e => {
@@ -36,10 +36,9 @@ const handleProposalChange = e => {
 };
 
 const getOneProposal = async () => {
-const value = web3.utils.toBN(parseInt(proposal));
-const vote = await contract.methods.getOneProposal(value).call({ from: accounts[0] });
-    alert(vote);
-setProposal("");
+    const value = web3.utils.toBN(parseInt(proposal));
+    alert(await contract.methods.getOneProposal(value).call({ from: accounts[0] }));
+    setProposal("");
 };
 
   return (
@@ -52,7 +51,7 @@ setProposal("");
         </div>) : <></>
         ):
         ( 
-        workflowstep && workflowstep > 2 ? (<div>
+        workflowstep && workflowstep > 0 && hasProposal ? (<div>
             <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
             <button onClick={getOneProposal} >
             get one propoal

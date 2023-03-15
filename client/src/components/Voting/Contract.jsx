@@ -1,11 +1,16 @@
-import { useContext } from "react";
-import { VotingContext } from "../../contexts/VotingContext/VotingContext";
+import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
+import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
 
 function Contract() {
-const {workflowStatus} = useContext(VotingContext);
+
+const { workflowstep } = UseWorkflowStep();
+const {workflowStatus} = UseWorkflowStatus(workflowstep);
 
   return (
-      <p>{workflowStatus}</p>
+      <>
+        <p>{workflowStatus}</p>
+        <p></p>
+      </>
   );
 }
 

@@ -1,14 +1,12 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
-export function UseWorkflowStep(workflowStatus) {
+export function UseWorkflowStep() {
 
   const { state: { contract } } = useEth();
   const [workflowstep,setWorkflowStep] = useState(0);
 
   useEffect(() => {
-  
-  if (!workflowStatus) return
   
   async function fetchData() { 
 
@@ -17,7 +15,7 @@ export function UseWorkflowStep(workflowStatus) {
   }
   fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [workflowStatus])
+  }, [workflowstep])
   
   return { workflowstep }
   

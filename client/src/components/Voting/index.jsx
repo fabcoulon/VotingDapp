@@ -4,11 +4,11 @@ import Contract from "./Contract";
 import NoticeNoArtifact from "./NoticeNoArtifact";
 import NoticeWrongNetwork from "./NoticeWrongNetwork";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import VotingButton from "./WorkflowStatus";
 import Address from "./Address";
 import StepButton from "./StepButton";
 import VotingInput from "./VotingInput";
 import InfoGetter from "./InfoGetter";
+import { Winner } from "../Winner";
 
 function Voting() {
   const { state } = useEth();
@@ -16,20 +16,19 @@ function Voting() {
   const [proposal, setProposal] = useState("");
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
-  const [isRegistred, setIsRegistred] = useState(false);
   const voting =
     <>
       <div className="contract-container">
       <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote,isRegistred,setIsRegistred}} >
+      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
         <div>
         <InfoGetter type="voter"/>
         <InfoGetter type="proposal"/>
         </div>
         <Contract/>
+        <Winner/>
         <StepButton />
         <Address />
-        <VotingButton />
         <VotingInput />
       </VotingContext.Provider>
       </div>

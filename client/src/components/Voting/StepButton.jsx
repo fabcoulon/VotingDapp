@@ -4,16 +4,18 @@ import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseHasVoter } from "../../hooks/UseHasVoter";
+import { UseHasProposal } from "../../hooks/UseHasProposal";
 
 function StepButton(){
 
 const { state: { contract, accounts } } = useEth();
-const { workflowStatus, setWorkflowStatus } = useContext(VotingContext);
+const { setWorkflowStatus,proposal } = useContext(VotingContext);
 
-const { workflowstep,voterAddress } = UseWorkflowStep(workflowStatus);
+const { workflowstep,voterAddress } = UseWorkflowStep();
 
 const { isOwner } = UseIsOwner(accounts[0]);
 const { hasVoter } = UseHasVoter(voterAddress);
+const { hasProposal } = UseHasProposal(proposal);
 
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
@@ -44,7 +46,7 @@ switch (parseInt(workflowstep)) {
         case 0:
             return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
         case 1:
-            return isOwner&&<button onClick={endProposalsRegistering}>endProposalsRegistering()</button>;
+            return hasProposal && isOwner&&<button onClick={endProposalsRegistering}>endProposalsRegistering()</button>;
         case 2:
             return isOwner&&<button onClick={startVotingSession}>startVotingSession()</button>;
         case 3:

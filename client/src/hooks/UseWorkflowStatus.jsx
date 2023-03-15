@@ -1,15 +1,10 @@
-import { useEffect,useContext } from "react";
-import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-
-function WorkflowStatus() {
-
-let {setWorkflowStatus,workflowStatus} = useContext(VotingContext);
-
-const { workflowstep } = UseWorkflowStep(workflowStatus);
+import { useEffect, useState } from "react";
   
-useEffect(() => {
+export function UseWorkflowStatus(workflowstep) {
 
+const [workflowStatus,setWorkflowStatus] = useState(0);
+
+useEffect(() => {
 async function getworkflowStatus() {
     switch(parseInt(workflowstep)){
         case 0 : setWorkflowStatus("Registering voters");
@@ -29,7 +24,8 @@ async function getworkflowStatus() {
         
     }
     getworkflowStatus();
-    },[workflowstep,setWorkflowStatus]);
-}
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[workflowstep]);
 
-export default WorkflowStatus;
+    return { workflowStatus }
+}
