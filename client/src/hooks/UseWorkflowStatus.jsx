@@ -17,7 +17,7 @@ async function getworkflowStatus() {
         break;
         case 4 : setWorkflowStatus("Voting session ended");
         break;
-        case 5 : setWorkflowStatus("Votes tallied");
+        case 5 : setWorkflowStatus("");
         break;
         default: setWorkflowStatus("Step unknow");
         }

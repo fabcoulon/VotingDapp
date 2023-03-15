@@ -23,6 +23,7 @@ const {isProposal} = UseIsProposal(vote);
 
 useEffect(() => {
 
+  setIsRegistred(false);
   const options = {
     filter: {
       value: [],
@@ -37,7 +38,6 @@ useEffect(() => {
 
   const addVoter = async () => {
 
-    setIsRegistred(false);
     setVoterAddress("");
 
     if (!web3.utils.isAddress(voterAddress)) {
@@ -71,7 +71,6 @@ useEffect(() => {
     } 
   const value = web3.utils.toBN(parseInt(vote));
     await contract.methods.setVote(value).send({ from: accounts[0] });
-    setVote("");
   };
 
 switch (parseInt(workflowstep)) {

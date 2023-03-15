@@ -9,10 +9,9 @@ import { UseHasProposal } from "../../hooks/UseHasProposal";
 function StepButton(){
 
 const { state: { contract, accounts } } = useEth();
-const { setWorkflowStatus,proposal } = useContext(VotingContext);
+const { setWorkflowStatus,proposal,voterAddress } = useContext(VotingContext);
 
-const { workflowstep,voterAddress } = UseWorkflowStep();
-
+const { workflowstep} = UseWorkflowStep();
 const { isOwner } = UseIsOwner(accounts[0]);
 const { hasVoter } = UseHasVoter(voterAddress);
 const { hasProposal } = UseHasProposal(proposal);
@@ -39,9 +38,9 @@ setWorkflowStatus("Voting session ended");
 
 const tallyVotes = async () => {
 await contract.methods.tallyVotes().send({ from: accounts[0] });
-setWorkflowStatus("Voting session ended");
+setWorkflowStatus("Votes tallied");
 };
-
+alert(workflowstep);
 switch (parseInt(workflowstep)) {
         case 0:
             return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
@@ -53,8 +52,10 @@ switch (parseInt(workflowstep)) {
             return isOwner&&<button onClick={endVotingSession}>endVotingSession()</button>;
         case 4:
             return isOwner&&<button onClick={tallyVotes}>tallyVotes()</button>;
-        default:
+        case 5:
             return <p>Votes ended</p>;
+        default:
+            return <p>Step unknow</p>;
         }
 }
 
