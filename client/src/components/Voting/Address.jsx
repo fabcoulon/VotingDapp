@@ -5,8 +5,7 @@ function Address() {
 
   return (
     <div className="addr">
-        Connected address
-        <br />
+        Connected address : 
         {accounts && accounts[0] && <pre>{accounts[0]}</pre>}
     </div>
     );

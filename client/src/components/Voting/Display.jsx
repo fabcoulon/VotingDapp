@@ -1,15 +1,63 @@
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
+//import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
+import {Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 
 function Display() {
 
 const { workflowstep } = UseWorkflowStep();
-const {workflowStatus} = UseWorkflowStatus(workflowstep);
+const workflowstepInt = parseInt(workflowstep);
+//const {workflowStatus} = UseWorkflowStatus(workflowstep);
 
   return (
       <>
-        <p>{workflowStatus}</p>
+      <br />
+      <Breadcrumb
+            spacing="8px"
+            separator= "/"
+            fontFamily="Arial"
+            fontWeight="semibold"
+            fontSize="lg">
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" isCurrentPage color={workflowstepInt===0 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===0 && "uppercase" }>
+              Registering voters
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" isCurrentPage color={workflowstepInt===1 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===1 && "uppercase" }>
+                Proposals registration started
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" isCurrentPage color={workflowstepInt===2 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===2 && "uppercase" }>
+                Proposals registration ended
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" isCurrentPage color={workflowstepInt===3 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===3 && "uppercase" }>
+                Voting session started
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" textDecoration="none" color={workflowstepInt===4 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===4 && "uppercase" }>
+                Voting session ended
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+
+            <BreadcrumbItem>
+              <BreadcrumbLink className="no-underline" color={workflowstepInt===5 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===5 && "uppercase" }>
+                The tally is over
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+          <br />
+        <p>{/*workflowStatus*/}</p>
         <p></p>
+
+
       </>
   );
 }

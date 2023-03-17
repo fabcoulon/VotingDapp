@@ -1,15 +1,18 @@
 import { EthProvider } from "./contexts/EthContext";
 import Voting from "./components/Voting";
+import { ChakraProvider } from '@chakra-ui/react'
 
 function App() {
   return (
-    <EthProvider>
-      <div id="App">
-        <div className="container">
-          <Voting />
+    <ChakraProvider>
+      <EthProvider>
+        <div id="App">
+          <div className="container">
+            <Voting />
+          </div>
         </div>
-      </div>
-    </EthProvider>
+      </EthProvider>
+    </ChakraProvider>
   );
 }
 

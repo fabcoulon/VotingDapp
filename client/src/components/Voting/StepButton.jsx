@@ -5,6 +5,7 @@ import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseHasVoter } from "../../hooks/UseHasVoter";
 import { UseHasProposal } from "../../hooks/UseHasProposal";
+import { Button } from '@chakra-ui/react'
 
 function StepButton(){
 
@@ -43,15 +44,15 @@ setWorkflowStatus("Votes tallied");
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
+            return hasVoter && isOwner&&<Button colorScheme='blue' onClick={startProposalsRegistering}>startProposalsRegistering()</Button>;
         case 1:
-            return hasProposal && isOwner&&<button onClick={endProposalsRegistering}>endProposalsRegistering()</button>;
+            return hasProposal && isOwner&&<Button colorScheme='blue' onClick={endProposalsRegistering}>endProposalsRegistering()</Button>;
         case 2:
-            return isOwner&&<button onClick={startVotingSession}>startVotingSession()</button>;
+            return isOwner&&<Button colorScheme='blue' onClick={startVotingSession}>startVotingSession()</Button>;
         case 3:
-            return isOwner&&<button onClick={endVotingSession}>endVotingSession()</button>;
+            return isOwner&&<Button colorScheme='blue' onClick={endVotingSession}>endVotingSession()</Button>;
         case 4:
-            return isOwner&&<button onClick={tallyVotes}>tallyVotes()</button>;
+            return isOwner&&<Button colorScheme='blue' onClick={tallyVotes}>tallyVotes()</Button>;
         case 5:
             return <p>Votes ended</p>;
         default:

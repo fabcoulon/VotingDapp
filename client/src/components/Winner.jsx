@@ -1,6 +1,7 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 import { UseWorkflowStep } from '../hooks/UseWorkflowStep';
+import { Box, Text, Divider, Center } from "@chakra-ui/react";
 
 export function Winner() {
 
@@ -19,5 +20,17 @@ export function Winner() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [winner])
   
-   return workflowstep > 4 && <p>Winning proposal { winner }</p>
+  const winnerBox = 
+  <>
+  <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+  <Text as="b">The winningProposalID is : </Text>{ winner }
+  </Box>
+  <Center height='30px'>
+    <Divider orientation='vertical' />
+  </Center>
+  </>;
+
+   return workflowstep > 4 && winnerBox
+   
+  
   }

@@ -6,6 +6,7 @@ import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseIsVoter } from "../../hooks/UseIsVoter";
 import { UseHasVoted } from "../../hooks/UseHasVoted";
 import { UseIsProposal } from "../../hooks/UseIsProposal";
+import { Button } from '@chakra-ui/react'
 
 function ActionButton(){
     
@@ -75,11 +76,11 @@ useEffect(() => {
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return isOwner&&<button onClick={addVoter} >Add voter</button>
+            return isOwner&&<Button onClick={addVoter} colorScheme='blue'>Add voter</Button>
         case 1:
-            return isVoter&&<button onClick={addProposal} >Add proposal</button>
+            return isVoter&&<Button onClick={addProposal} colorScheme='blue'>Add proposal</Button>
         case 3:
-            return <button onClick={setVote} >Vote for proposal</button>
+            return <Button onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
         default:
         }
 }

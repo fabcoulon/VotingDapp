@@ -21,7 +21,7 @@ html {
 }
 
 #App .container {
-  width: 80%;
+  width: 100%;
   min-width: 60rem;
   height: 100%;
 }
@@ -151,4 +151,8 @@ hr {
 #App .container footer a {
   display: inline-block;
   margin: 2rem 1rem 0 0;
+}
+
+.no-underline {
+  text-decoration: none !important;
 }

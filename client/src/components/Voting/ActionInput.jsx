@@ -4,6 +4,7 @@ import useEth from "../../contexts/EthContext/useEth";
 import { UseIsOwner } from "../../hooks/UseIsOwner";
 import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
 import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { Input } from '@chakra-ui/react'
 
 function ActionInput(){
     
@@ -32,11 +33,11 @@ const handleVoteChange = e => {
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return isOwner&&<input type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
+            return isOwner&&<Input size="lg" borderWidth="1px" type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
         case 1:
-            return isVoter&& <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
+            return isVoter&& <Input size="lg" borderWidth="1px" type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
         case 3:
-            return <input type="text" placeholder="proposal id" value={vote} onChange={handleVoteChange}/>
+            return <Input size="lg" borderWidth="1px" type="text" placeholder="proposal id" value={vote} onChange={handleVoteChange}/>
         default:
         }
 }
