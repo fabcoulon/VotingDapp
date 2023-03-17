@@ -19,19 +19,19 @@ function Voting() {
   const voting =
     <>
       <div className="contract-container">
-      <div>
-      <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
         <div>
-        <InfoGetter type="voter"/>
-        <InfoGetter type="proposal"/>
+        <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
+          <div>
+          <InfoGetter type="voter"/>
+          <InfoGetter type="proposal"/>
+          </div>
+          <Display/>
+          <Winner/>
+          <StepButton />
+          <Address />
+          <VotingInput />
+        </VotingContext.Provider>
         </div>
-        <Display/>
-        <Winner/>
-        <StepButton />
-        <Address />
-        <VotingInput />
-      </VotingContext.Provider>
-      </div>
       </div>
     </>;
 

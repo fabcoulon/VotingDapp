@@ -24,14 +24,8 @@ const {isProposal} = UseIsProposal(vote);
 useEffect(() => {
 
   setIsRegistred(false);
-  const options = {
-    filter: {
-      value: [],
-    },
-    fromBlock: 0,
-  };
 
-  contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0] === voterAddress) && setIsRegistred(true));
+  contract.events.VoterRegistered({fromBlock: 0}).on("data",event => (event.returnValues[0] === voterAddress) && setIsRegistred(true));
 
 // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [voterAddress]);
@@ -79,7 +73,7 @@ switch (parseInt(workflowstep)) {
         case 1:
             return isVoter&&<button onClick={addProposal} >Add proposal</button>
         case 3:
-            return <button onClick={setVote} >Vote for proposal</button>
+            return isVoter&&<button onClick={setVote} >Vote for proposal</button>
         default:
         }
 }

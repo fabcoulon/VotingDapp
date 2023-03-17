@@ -56,7 +56,7 @@ const getOneProposal = async () => {
 
   return (
         (type === "voter") ?(
-            (hasVoter) ? (<div>      
+            (hasVoter && isVoter) ? (<div>      
             <input type="text" placeholder="address" value={address} onChange={handleAddressChange}/>
             <button onClick={getVoter} >
             get voter
@@ -64,7 +64,7 @@ const getOneProposal = async () => {
         </div>) : <></>
         ):
         ( 
-        workflowstep && workflowstep > 0 && hasProposal ? (<div>
+        workflowstep && workflowstep > 0 && hasProposal && isVoter ? (<div>
             <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
             <button onClick={getOneProposal} >
             get one propoal

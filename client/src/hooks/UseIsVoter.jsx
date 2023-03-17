@@ -3,22 +3,16 @@ import { useState, useEffect } from 'react';
 
 export function UseIsVoter(account) {
 
-  const { state: { contract } } = useEth();
+  const { state: { contract,web3,txhash } } = useEth();
   const [isVoter, setIsVoter] = useState(false);
 
   useEffect(() => {
   
     setIsVoter(false);
     async function fetchData() { 
-  
-      const options = {
-        filter: {
-          value: [],
-        },
-        fromBlock: 0,
-      };
     
-      contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0] === account) && setIsVoter(true));
+    const deployTx = await web3.eth.getTransaction(txhash);
+    contract.events.VoterRegistered({fromBlock:deployTx.blockNumber , toBlock: "latest"}).on("data",event => (event.returnValues[0] === account) && setIsVoter(true));
   
     }
     fetchData();

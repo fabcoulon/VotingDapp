@@ -43,15 +43,15 @@ setWorkflowStatus("Votes tallied");
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>startProposalsRegistering()</button>;
+            return hasVoter && isOwner&&<button onClick={startProposalsRegistering}>start proposals registering</button>;
         case 1:
-            return hasProposal && isOwner&&<button onClick={endProposalsRegistering}>endProposalsRegistering()</button>;
+            return hasProposal && isOwner&&<button onClick={endProposalsRegistering}>End proposals registering</button>;
         case 2:
-            return isOwner&&<button onClick={startVotingSession}>startVotingSession()</button>;
+            return isOwner&&<button onClick={startVotingSession}>Start voting session</button>;
         case 3:
-            return isOwner&&<button onClick={endVotingSession}>endVotingSession()</button>;
+            return isOwner&&<button onClick={endVotingSession}>End voting session</button>;
         case 4:
-            return isOwner&&<button onClick={tallyVotes}>tallyVotes()</button>;
+            return isOwner&&<button onClick={tallyVotes}>Tally votes</button>;
         case 5:
             return <p>Votes ended</p>;
         default:

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 export function UseIsProposal(vote) {
 
-  const { state: { contract } } = useEth();
+  const { state: { contract,web3,txhash } } = useEth();
   const [isProposal, setIsProposal] = useState(false);
 
   useEffect(() => {
@@ -11,13 +11,8 @@ export function UseIsProposal(vote) {
     setIsProposal(false);
     async function fetchData() { 
   
-      const options = {
-        filter: {
-          value: [],
-        },
-        fromBlock: 0,
-      };
-      contract.events.ProposalRegistered(options).on("data",event => (event.returnValues[0] === vote) && setIsProposal(true));
+    const deployTx = await web3.eth.getTransaction(txhash);
+    contract.events.ProposalRegistered({fromBlock:deployTx.blockNumber , toBlock: "latest"}).on("data",event => (event.returnValues[0] === vote) && setIsProposal(true));
   
     }
     fetchData();
