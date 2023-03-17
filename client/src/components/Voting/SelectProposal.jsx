@@ -1,13 +1,13 @@
 import { useState, useEffect,useContext } from "react";
 import useEth from "../../contexts/EthContext/useEth";
-import { UseHasProposal } from "../../hooks/UseHasProposal";
+import { useHasProposal } from "../../hooks/useHasProposal";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 
 function SelectProposal() {
     const { state: { contract,accounts } } = useEth();
     const [proposalEvents, setProposalEvents] = useState([]);
     let {changeVote} = useContext(VotingContext);
-    const {hasProposal} = UseHasProposal();
+    const {hasProposal} = useHasProposal();
 
     const handleVoteChange = e => {
         changeVote(e.target.value);

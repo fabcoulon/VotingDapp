@@ -1,7 +1,7 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
-export function UseHasVoted(voterAddress) {
+export function useHasVoted(voterAddress) {
 
   const { state: { contract,web3,txhash } } = useEth();
   const [hasVoted,setHasVoted] = useState(false);

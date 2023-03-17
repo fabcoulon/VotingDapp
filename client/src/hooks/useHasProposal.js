@@ -1,7 +1,7 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
-export function UseHasProposal(proposal) {
+export function useHasProposal(proposal) {
 
   const { state: { contract,web3,txhash } } = useEth();
   const [hasProposal,setHasProposal] = useState(false);

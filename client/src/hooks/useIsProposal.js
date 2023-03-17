@@ -1,7 +1,7 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
 
-export function UseIsProposal(vote) {
+export function useIsProposal(vote) {
 
   const { state: { contract,web3,txhash } } = useEth();
   const [isProposal, setIsProposal] = useState(false);

@@ -1,10 +1,10 @@
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useWorkflowStatus } from "../../hooks/useWorkflowStatus";
 
 function Display() {
 
-const { workflowstep } = UseWorkflowStep();
-const {workflowStatus} = UseWorkflowStatus(workflowstep);
+const { workflowstep } = useWorkflowStep();
+const {workflowStatus} = useWorkflowStatus(workflowstep);
 
   return (
       <>
