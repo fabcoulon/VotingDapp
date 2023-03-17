@@ -7,7 +7,6 @@ export function UseHasVoter(voterAddress) {
   const [hasVoter,setHasVoter] = useState(false);
 
   useEffect(() => {
-  
   async function fetchData() { 
   
   const deployTx = await web3.eth.getTransaction(txhash);
@@ -19,7 +18,6 @@ export function UseHasVoter(voterAddress) {
   fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [voterAddress])
-  
   return { hasVoter }
   
   }

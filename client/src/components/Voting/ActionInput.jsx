@@ -29,7 +29,8 @@ switch (parseInt(workflowstep)) {
         case 0:
             return isOwner&&<input type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
         case 1:
-            return isVoter&& <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
+            return  isOwner ? <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/> 
+            : isVoter ? <input type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/> : <></>    
         case 3:
             return isVoter&& <SelectProposal />
         default:
