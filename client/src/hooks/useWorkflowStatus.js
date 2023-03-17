@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
   
-export function UseWorkflowStatus(workflowstep) {
+export function useWorkflowStatus(workflowstep) {
 
 const [workflowStatus,setWorkflowStatus] = useState(0);
 

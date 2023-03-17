@@ -1,12 +1,12 @@
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-//import { UseWorkflowStatus } from "../../hooks/UseWorkflowStatus";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+//import { useWorkflowStatus } from "../../hooks/useWorkflowStatus";
 import {Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react'
 
 function Display() {
 
-const { workflowstep } = UseWorkflowStep();
+const { workflowstep } = useWorkflowStep();
 const workflowstepInt = parseInt(workflowstep);
-//const {workflowStatus} = UseWorkflowStatus(workflowstep);
+//const {workflowStatus} = useWorkflowStatus(workflowstep);
 
   return (
       <>

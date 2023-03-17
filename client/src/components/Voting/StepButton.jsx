@@ -1,22 +1,21 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import { UseIsOwner } from "../../hooks/UseIsOwner";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseHasVoter } from "../../hooks/UseHasVoter";
-import { UseHasProposal } from "../../hooks/UseHasProposal";
 import { Button } from '@chakra-ui/react'
+import { useIsOwner } from "../../hooks/useIsOwner";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useHasVoter } from "../../hooks/useHasVoter";
+import { useHasProposal } from "../../hooks/useHasProposal";
 
 function StepButton(){
 
 const { state: { contract, accounts } } = useEth();
 const { setWorkflowStatus,proposal,voterAddress } = useContext(VotingContext);
 
-const { workflowstep} = UseWorkflowStep();
-const { isOwner } = UseIsOwner(accounts[0]);
-const { hasVoter } = UseHasVoter(voterAddress);
-const { hasProposal } = UseHasProposal(proposal);
-
+const { workflowstep} = useWorkflowStep();
+const { isOwner } = useIsOwner(accounts[0]);
+const { hasVoter } = useHasVoter(voterAddress);
+const { hasProposal } = useHasProposal(proposal);
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
 setWorkflowStatus("Proposals registration started");

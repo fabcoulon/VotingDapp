@@ -4,8 +4,8 @@ import { Button, Input, AlertDialog, AlertDialogBody, AlertDialogHeader,
 import { useDisclosure } from "@chakra-ui/react";
 import useEth from "../../contexts/EthContext/useEth";
 import { useState } from "react";
-//import { UseHasProposal } from "../../hooks/UseHasProposal";
-import { UseIsProposal } from "../../hooks/UseIsProposal";
+//import { useHasProposal } from "../../hooks/useHasProposal";
+import { useIsProposal } from "../../hooks/useIsProposal";
 
 
 function AlertInfoProposal() {
@@ -15,8 +15,8 @@ function AlertInfoProposal() {
     let [alertMessage,setAlertMessage] = useState("");
     const [proposal,setProposal] = useState("");
 
-    //const { hasProposal } = UseHasProposal(proposal);
-    const { isProposal } = UseIsProposal(proposal);
+    //const { hasProposal } = useHasProposal(proposal);
+    const { isProposal } = useIsProposal(proposal);
 
     const handleProposalChange = e => {
         if (/^\d+$|^$/.test(e.target.value)) {

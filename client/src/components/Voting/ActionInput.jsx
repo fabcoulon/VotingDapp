@@ -1,21 +1,22 @@
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import useEth from "../../contexts/EthContext/useEth";
-import { UseIsOwner } from "../../hooks/UseIsOwner";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { useIsOwner } from "../../hooks/useIsOwner";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useIsVoter } from "../../hooks/useIsVoter";
+import SelectProposal from "./SelectProposal";
 import { Input } from '@chakra-ui/react'
 
 function ActionInput(){
     
-let {proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote} = useContext(VotingContext);
+let {proposal,setProposal,voterAddress,setVoterAddress} = useContext(VotingContext);
 
 const { state: {accounts } } = useEth();
 
-const { isOwner } = UseIsOwner(accounts[0]);
+const { isOwner } = useIsOwner(accounts[0]);
 
-const { workflowstep } = UseWorkflowStep();
-const {isVoter} = UseIsVoter(accounts[0]);
+const { workflowstep } = useWorkflowStep();
+const {isVoter} = useIsVoter(accounts[0]);
 
 const handleProposalChange = e => {
   setProposal(e.target.value);
@@ -25,19 +26,14 @@ const handleAddressChange = e => {
   setVoterAddress(e.target.value);
 };
 
-const handleVoteChange = e => {
-  if (/^\d+$|^$/.test(e.target.value)) {
-    changeVote(e.target.value);
-  }
-};
-
 switch (parseInt(workflowstep)) {
         case 0:
             return isOwner&&<Input size="lg" borderWidth="1px" type="text" placeholder="address" value={voterAddress} onChange={handleAddressChange}/> 
         case 1:
-            return isVoter&& <Input size="lg" borderWidth="1px" type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
+            return  isOwner ? <Input type="text" size="lg" borderWidth="1px" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/> 
+            : isVoter ? <Input type="text" size="lg" borderWidth="1px" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/> : <></>    
         case 3:
-            return <Input size="lg" borderWidth="1px" type="text" placeholder="proposal id" value={vote} onChange={handleVoteChange}/>
+            return isVoter&& <SelectProposal />
         default:
         }
 }

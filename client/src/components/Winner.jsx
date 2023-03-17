@@ -1,12 +1,12 @@
 import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect } from 'react';
-import { UseWorkflowStep } from '../hooks/UseWorkflowStep';
+import { useWorkflowStep } from '../hooks/useWorkflowStep';
 import { Box, Text, Divider, Center } from "@chakra-ui/react";
 
 export function Winner() {
 
   const { state: { contract } } = useEth();
-  const { workflowstep } = UseWorkflowStep();
+  const { workflowstep } = useWorkflowStep();
   const [winner,setWinner] = useState(0);
 
   useEffect(() => {

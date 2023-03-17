@@ -1,8 +1,8 @@
 import React from "react";
-import { Button, Input, AlertDialog, AlertDialogBody, AlertDialogHeader, 
+import { Button, Input, Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
         AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
-import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { useIsVoter } from "../../hooks/useIsVoter";
 import useEth from "../../contexts/EthContext/useEth";
 import { useState } from "react";
 
@@ -11,7 +11,7 @@ function AlertInfoVoter() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const cancelRef = React.useRef();
     const [address,setAddress] = useState("");
-    const {isVoter} =  UseIsVoter(address);
+    const {isVoter} =  useIsVoter(address);
     const { state: { contract, accounts,web3 } } = useEth();
     let [alertMessage,setAlertMessage] = useState("");
 
@@ -21,32 +21,24 @@ function AlertInfoVoter() {
 
     const getVoter = async (e) => {
       onOpen();
-      setAlertMessage("");
-      alertMessage="";
-
-      alert(await contract.methods.getVoter(address).call({ from: accounts[0] }));
-      
-      if (!web3.utils.isAddress(address)) {
-        //alertMessage = "The address is Invalid. ";
-        setAlertMessage("The address is Invalid. ");
-      }
-      if(!isVoter)
-      {
-        //alertMessage +="The voter does not exists.";
-        setAlertMessage("The voter does not exists.");
-      }
-      //alert(alertMessage.length);
+      alert(alertMessage);
       if (alertMessage.length === 0) { 
-        //alertMessage = await contract.methods.getVoter(address).call({ from: accounts[0] }).toString();
-        setAlertMessage(await contract.methods.getVoter(address).call({ from: accounts[0] }).toString());
+        setAlertMessage("The input is empty");
+      } else if (!(await web3.utils.isAddress(address))) {
+        setAlertMessage("The address is Invalid. ");
+      } else if (!isVoter) {
+        setAlertMessage("The voter does not exists.");
+      } else {
+        contract.methods.getVoter(address).call({ from: accounts[0] })
+          .then(function(voter) {
+            //setAlertMessage(voter);
+            setAlertMessage(" isRegistered : "+voter.isRegistered+"\n hasVoted : "+voter.hasVoted
+                            + "\n\r votedProposalId : "+voter.votedProposalId);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
-      
-      const response = await fetch(contract.methods.getVoter(address).call({ from: accounts[0] }));
-      const data = await response.json();
-      setAlertMessage(data);
-      //alert(await contract.methods.getVoter(address).call({ from: accounts[0] }));
-
-      //setAlertMessage(alertMessage);
   };
   
     return (
@@ -64,12 +56,13 @@ function AlertInfoVoter() {
           isCentered
         >
           <AlertDialogOverlay />
-  
           <AlertDialogContent>
             <AlertDialogHeader>Voter Informations : </AlertDialogHeader>
             <AlertDialogCloseButton />
             <AlertDialogBody>
-            {alertMessage}
+              <Text>
+              {alertMessage}
+              </Text>
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button ref={cancelRef} onClick={onClose}>

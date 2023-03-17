@@ -156,3 +156,7 @@ hr {
 .no-underline {
   text-decoration: none !important;
 }
+
+#selectContainer{
+  display: inline-block;
+}

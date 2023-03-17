@@ -1,11 +1,11 @@
 import useEth from "../../contexts/EthContext/useEth";
-import { useEffect, useContext, useState } from "react";
+import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import { UseIsOwner } from "../../hooks/UseIsOwner";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseIsVoter } from "../../hooks/UseIsVoter";
-import { UseHasVoted } from "../../hooks/UseHasVoted";
-import { UseIsProposal } from "../../hooks/UseIsProposal";
+import { useIsOwner } from "../../hooks/useIsOwner";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useIsVoter } from "../../hooks/useIsVoter";
+import { useHasVoted } from "../../hooks/useHasVoted";
+import { useIsProposal } from "../../hooks/useIsProposal";
 import { Button } from '@chakra-ui/react'
 
 function ActionButton(){
@@ -13,56 +13,48 @@ function ActionButton(){
 const { state: { contract, accounts,web3 } } = useEth();
 let {proposal,setProposal,voterAddress,setVoterAddress,vote} = useContext(VotingContext);
 
-const { isOwner } = UseIsOwner(accounts[0]);
+const { isOwner } = useIsOwner(accounts[0]);
 
-const [isRegistred,setIsRegistred] = useState(false);
+const { workflowstep } = useWorkflowStep();
+const {isVoter} = useIsVoter(voterAddress);
+const {hasVoted} = useHasVoted(accounts[0]);
+const {isProposal} = useIsProposal(vote);
 
-const { workflowstep } = UseWorkflowStep();
-const {isVoter} = UseIsVoter(accounts[0]);
-const {hasVoted} = UseHasVoted(accounts[0]);
-const {isProposal} = UseIsProposal(vote);
+const addVoter = async () => {
 
-useEffect(() => {
+  if (!web3.utils.isAddress(voterAddress)) {
+    return alert("invalid address")
+  }
 
-  setIsRegistred(false);
-  const options = {
-    filter: {
-      value: [],
-    },
-    fromBlock: 0,
-  };
+  if(isVoter) {
+    return alert("Voter already registred");
+  }
 
-  contract.events.VoterRegistered(options).on("data",event => (event.returnValues[0] === voterAddress) && setIsRegistred(true));
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [voterAddress]);
-
-  const addVoter = async () => {
-
-    setVoterAddress("");
-
-    if (!web3.utils.isAddress(voterAddress)) {
-      return alert("invalid address")
-    }
-
-    if(isRegistred) {
-      return alert("Voter already registred");
-    }
-
-    await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
-
-  };
+  await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
+  alert(`Voter ${voterAddress} is regitrated`);
+  setVoterAddress("");
+};
 
   const addProposal = async () => {
     if (proposal === "") {
       return alert("No empty proposal please.");
 
     }
+     if (!isVoter) {
+      return alert("You are not registred as voter.");
+
+    }
     await contract.methods.addProposal(proposal).send({ from: accounts[0] });
+    alert(`Proposal ${proposal} is registred`);
     setProposal("");
   };
 
   const setVote = async () => {
+    if (!isVoter) {
+      return alert("You are not registred as voter.");
+
+    }
+
     if(hasVoted){
       return alert("You have already voted");
 
@@ -72,15 +64,17 @@ useEffect(() => {
     } 
   const value = web3.utils.toBN(parseInt(vote));
     await contract.methods.setVote(value).send({ from: accounts[0] });
+    alert(`${accounts[0]} has just voted for proposal ${proposal}`);
   };
 
 switch (parseInt(workflowstep)) {
         case 0:
             return isOwner&&<Button onClick={addVoter} colorScheme='blue'>Add voter</Button>
         case 1:
-            return isVoter&&<Button onClick={addProposal} colorScheme='blue'>Add proposal</Button>
+            return isOwner ? <Button onClick={addProposal} colorScheme='blue'>Add proposal</Button> 
+            : isVoter ? <Button onClick={addProposal} colorScheme='blue'>Add proposal</Button> : <></>                 
         case 3:
-            return <Button onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
+            return isVoter&&<Button onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
         default:
         }
 }
