@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import useEth from "../../contexts/EthContext/useEth";
-import { UseIsOwner } from "../../hooks/UseIsOwner";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { useIsOwner } from "../../hooks/useIsOwner";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useIsVoter } from "../../hooks/useIsVoter";
 import SelectProposal from "./SelectProposal";
 
 function ActionInput(){
@@ -12,10 +12,10 @@ let {proposal,setProposal,voterAddress,setVoterAddress} = useContext(VotingConte
 
 const { state: {accounts } } = useEth();
 
-const { isOwner } = UseIsOwner(accounts[0]);
+const { isOwner } = useIsOwner(accounts[0]);
 
-const { workflowstep } = UseWorkflowStep();
-const {isVoter} = UseIsVoter(accounts[0]);
+const { workflowstep } = useWorkflowStep();
+const {isVoter} = useIsVoter(accounts[0]);
 
 const handleProposalChange = e => {
   setProposal(e.target.value);

@@ -2,7 +2,7 @@ import useEth from '../contexts/EthContext/useEth';
 import { useState, useEffect, useContext } from 'react';
 import { VotingContext } from '../contexts/VotingContext/VotingContext';
 
-export function UseWorkflowStep() {
+export function useWorkflowStep() {
 
   const { state: { contract } } = useEth();
   const [workflowstep,setWorkflowStep] = useState(0);

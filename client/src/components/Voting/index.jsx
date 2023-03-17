@@ -8,7 +8,7 @@ import Address from "./Address";
 import StepButton from "./StepButton";
 import VotingInput from "./VotingInput";
 import InfoGetter from "./InfoGetter";
-import { Winner } from "../Winner";
+import { Winner } from "./Winner";
 
 function Voting() {
   const { state } = useEth();

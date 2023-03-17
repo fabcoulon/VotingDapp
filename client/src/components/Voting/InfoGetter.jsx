@@ -1,11 +1,11 @@
 import useEth from "../../contexts/EthContext/useEth";
 import { useState, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
-import { UseWorkflowStep } from "../../hooks/UseWorkflowStep";
-import { UseHasVoter } from "../../hooks/UseHasVoter";
-import { UseHasProposal } from "../../hooks/UseHasProposal";
-import { UseIsProposal } from "../../hooks/UseIsProposal";
-import { UseIsVoter } from "../../hooks/UseIsVoter";
+import { useWorkflowStep } from "../../hooks/useWorkflowStep";
+import { useHasVoter } from "../../hooks/useHasVoter";
+import { useHasProposal } from "../../hooks/useHasProposal";
+import { useIsProposal } from "../../hooks/useIsProposal";
+import { useIsVoter } from "../../hooks/useIsVoter";
 
 function InfoGetter({type}) {
 
@@ -15,11 +15,11 @@ const {voterAddress} =  useContext(VotingContext);
 const [address,setAddress] = useState("");
 const [proposal,setProposal] = useState("");
 
-const { workflowstep } = UseWorkflowStep();
-const { hasVoter } = UseHasVoter(voterAddress);
-const { hasProposal } = UseHasProposal(proposal);
-const { isProposal } = UseIsProposal(proposal);
-const {isVoter} =  UseIsVoter(address);
+const { workflowstep } = useWorkflowStep();
+const { hasVoter } = useHasVoter(voterAddress);
+const { hasProposal } = useHasProposal(proposal);
+const { isProposal } = useIsProposal(proposal);
+const {isVoter} =  useIsVoter(accounts[0]);
 
 const getVoter = async (e) => {
     if (!web3.utils.isAddress(address)) {
