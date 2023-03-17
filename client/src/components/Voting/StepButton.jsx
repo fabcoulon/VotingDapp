@@ -15,7 +15,6 @@ const { workflowstep} = UseWorkflowStep();
 const { isOwner } = UseIsOwner(accounts[0]);
 const { hasVoter } = UseHasVoter(voterAddress);
 const { hasProposal } = UseHasProposal(proposal);
-
 const startProposalsRegistering = async () => {
 await contract.methods.startProposalsRegistering().send({ from: accounts[0] });
 setWorkflowStatus("Proposals registration started");
