@@ -8,7 +8,7 @@ import Address from "./Address";
 import StepButton from "./StepButton";
 import VotingInput from "./VotingInput";
 import InfoGetter from "./InfoGetter";
-import { Winner } from "../Winner";
+import { Winner } from "./Winner";
 import { Box, Heading, Flex, Link, Text, Icon, Divider, Center } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
 
@@ -95,7 +95,7 @@ function Voting() {
       </div>
 
 
-      <Box bg="gray.100" boxShadow="md" mt={8}>
+      <Box bg="gray.100" boxShadow="md" mt={8}  position="fixed" bottom="0" width="100%">
         <Flex direction="column" justify="center" align="center" p={4}>
           <Text color="gray.600" mb={2}>
             © 2023 Mon application. Tous droits réservés.

@@ -21,10 +21,10 @@ function AlertInfoVoter() {
 
     const getVoter = async (e) => {
       onOpen();
-      alert(alertMessage);
-      if (alertMessage.length === 0) { 
+      /*if (alertMessage.length === 0) { 
         setAlertMessage("The input is empty");
-      } else if (!(await web3.utils.isAddress(address))) {
+      } */
+       if (!(await web3.utils.isAddress(address))) {
         setAlertMessage("The address is Invalid. ");
       } else if (!isVoter) {
         setAlertMessage("The voter does not exists.");
@@ -40,10 +40,9 @@ function AlertInfoVoter() {
           });
       }
   };
-  
     return (
       <>
-        <Input size="lg" borderWidth="1px" type="text" placeholder="address" value={address} onChange={handleAddressChange}/>
+        <Input size="lg" borderWidth="1px" type="text" placeholder="address" value={address} onInput={handleAddressChange} />
         <Button onClick={getVoter} colorScheme='blue'>
           get voter
         </Button> 

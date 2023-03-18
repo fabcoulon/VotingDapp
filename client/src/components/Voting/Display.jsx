@@ -54,10 +54,6 @@ const workflowstepInt = parseInt(workflowstep);
             </BreadcrumbItem>
           </Breadcrumb>
           <br />
-        <p>{/*workflowStatus*/}</p>
-        <p></p>
-
-
       </>
   );
 }
