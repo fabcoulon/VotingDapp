@@ -13,18 +13,18 @@ export function Winner() {
 
   useEffect(() => {
   
-  async function fetchData() { 
+    async function fetchData() { 
 
-    const winningProposalId = await contract.methods.winningProposalID().call();
-    await new Promise(async() => {
-        const proposal = await contract.methods.getOneProposal(winningProposalId).call({ from: accounts[0] });
-        setWinningProposal(proposal[0]);
-        return proposal;  
-    });
-  }
-  fetchData();
+      const winningProposalId = await contract.methods.winningProposalID().call();
+      await new Promise(async() => {
+          const proposal = await contract.methods.getOneProposal(winningProposalId).call({ from: accounts[0] });
+          setWinningProposal(proposal[0]);
+      });
+    }
+    fetchData();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vote])
+  }, [vote,workflowstep])
+  
   const winnerBox = 
   <>
   <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
@@ -35,4 +35,6 @@ export function Winner() {
   </Center>
   </>;
    return workflowstep > 4 && winnerBox
+   
+  
   }

@@ -98,11 +98,11 @@ function Voting() {
       <Box bg="gray.100" boxShadow="md" mt={8}  position="fixed" bottom="0" width="100%">
         <Flex direction="column" justify="center" align="center" p={4}>
           <Text color="gray.600" mb={2}>
-            © 2023 Mon application. Tous droits réservés.
+            © 2023 My application. All rights reserved.
           </Text>
           <Link href="https://github.com/fabcoulon/VotingDapp" mb={2}>
             <Icon as={FaGithub} color="blue.500" mr={2} />
-            Dépôt Git
+            Git repository
           </Link>
         </Flex>
       </Box>

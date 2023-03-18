@@ -8,7 +8,7 @@ import SelectProposal from "./SelectProposal";
 import { Input } from '@chakra-ui/react'
 
 function ActionInput(){
-    
+ 
 let {proposal,setProposal,voterAddress,setVoterAddress} = useContext(VotingContext);
 
 const { state: {accounts } } = useEth();
