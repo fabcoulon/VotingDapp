@@ -6,6 +6,7 @@ import { useWorkflowStep } from "../../hooks/useWorkflowStep";
 import { useIsVoter } from "../../hooks/useIsVoter";
 import { useHasVoted } from "../../hooks/useHasVoted";
 import { useIsProposal } from "../../hooks/useIsProposal";
+import { Button } from '@chakra-ui/react'
 
 function ActionButton(){
     
@@ -15,7 +16,7 @@ let {proposal,setProposal,voterAddress,setVoterAddress,vote} = useContext(Voting
 const { isOwner } = useIsOwner(accounts[0]);
 
 const { workflowstep } = useWorkflowStep();
-const {isVoter} = useIsVoter(voterAddress);
+const {isVoter} = useIsVoter(accounts[0]);
 const {hasVoted} = useHasVoted(accounts[0]);
 const {isProposal} = useIsProposal(vote);
 
@@ -63,17 +64,17 @@ const addVoter = async () => {
     } 
   const value = web3.utils.toBN(parseInt(vote));
     await contract.methods.setVote(value).send({ from: accounts[0] });
-    alert(`${accounts[0]} has just voted for proposal ${proposal}`);
+    alert(`${accounts[0]} has just voted for proposal ${value}`);
   };
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return isOwner&&<button onClick={addVoter} >Add voter</button>
+            return isOwner&&<Button size="lg" onClick={addVoter} colorScheme='blue'>Add voter</Button>
         case 1:
-            return isOwner ? <button onClick={addProposal} >Add proposal</button> 
-            : isVoter ? <button onClick={addProposal} >Add proposal</button> : <></>                 
+            return isOwner ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> 
+            : isVoter ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> : <></>                 
         case 3:
-            return isVoter&&<button onClick={setVote} >Vote for proposal</button>
+            return isVoter&&<Button size="lg" onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
         default:
         }
 }

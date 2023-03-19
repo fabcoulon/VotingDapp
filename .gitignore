@@ -1,3 +1,9 @@
 node_modules
 build
+package.json
 .env
+client/package-lock.json
+package-lock.json
+client/src/contracts/Context.json
+client/src/contracts/Ownable.json
+client/src/contracts/Voting.json

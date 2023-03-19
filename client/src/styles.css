@@ -21,7 +21,7 @@ html {
 }
 
 #App .container {
-  width: 80%;
+  width: 100%;
   min-width: 60rem;
   height: 100%;
 }
@@ -98,6 +98,7 @@ hr {
 #App .container .voting .contract-container {
   display: flex;
   justify-content: space-around;
+  margin:10rem;
 }
 
 #App .container .voting .contract-container p{
@@ -153,6 +154,18 @@ hr {
   margin: 2rem 1rem 0 0;
 }
 
+.no-underline {
+  text-decoration: none !important;
+}
+
 #selectContainer{
   display: inline-block;
+}
+
+.winningProposal{
+  color:rgb(250, 142, 4);
+}
+
+.votesEnded{
+  color:rgba(200, 7, 7, 0.800);
 }

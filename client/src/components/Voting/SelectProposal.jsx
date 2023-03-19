@@ -2,6 +2,7 @@ import { useState, useEffect,useContext } from "react";
 import useEth from "../../contexts/EthContext/useEth";
 import { useHasProposal } from "../../hooks/useHasProposal";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
+import { Select } from '@chakra-ui/react'
 
 function SelectProposal() {
     const { state: { contract,accounts } } = useEth();
@@ -34,7 +35,7 @@ function SelectProposal() {
   return (
     hasProposal&&<div id="selectContainer">
 
-        <select name="proposals" id="proposals" onChange={ handleVoteChange }>
+        <Select size="lg" name="proposals" id="proposals" onChange={ handleVoteChange }>
         <option value=""> Please choose an proposal
         </option>
             {proposalEvents.map((event, index) => {
@@ -42,8 +43,7 @@ function SelectProposal() {
                     <option key={index} value={event.proposalId}>{event.proposal}</option>
                     )
                 })}
-        </select>
-        <br />
+        </Select>
     </div>
   );
 }
