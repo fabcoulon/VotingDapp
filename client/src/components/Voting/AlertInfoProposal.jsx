@@ -26,7 +26,9 @@ function AlertInfoProposal() {
             setAlertMessage("Proposal not found");
         } else {
             const value = web3.utils.toBN(parseInt(proposal));
-            setAlertMessage((await contract.methods.getOneProposal(value).call({ from: accounts[0] }))[0]);
+            const description = (await contract.methods.getOneProposal(value).call({ from: accounts[0] }))[0];
+            const voteCount = (await contract.methods.getOneProposal(value).call({ from: accounts[0] }))[1];
+            setAlertMessage(`The proposal is ${description} and has ${voteCount} ${voteCount > 1 ? `votes` : `vote`}`);
         }
         setProposal("");
     };
@@ -44,6 +46,7 @@ function AlertInfoProposal() {
           onClose={onClose}
           isOpen={isOpen}
           isCentered
+          size="4xl"
         >
           <AlertDialogOverlay />
   
