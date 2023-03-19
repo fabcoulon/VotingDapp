@@ -64,17 +64,17 @@ const addVoter = async () => {
     } 
   const value = web3.utils.toBN(parseInt(vote));
     await contract.methods.setVote(value).send({ from: accounts[0] });
-    alert(`${accounts[0]} has just voted for proposal ${proposal}`);
+    alert(`${accounts[0]} has just voted for proposal ${value}`);
   };
 
 switch (parseInt(workflowstep)) {
         case 0:
-            return isOwner&&<Button onClick={addVoter} colorScheme='blue'>Add voter</Button>
+            return isOwner&&<Button size="lg" onClick={addVoter} colorScheme='blue'>Add voter</Button>
         case 1:
-            return isOwner ? <Button onClick={addProposal} colorScheme='blue'>Add proposal</Button> 
-            : isVoter ? <Button onClick={addProposal} colorScheme='blue'>Add proposal</Button> : <></>                 
+            return isOwner ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> 
+            : isVoter ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> : <></>                 
         case 3:
-            return isVoter&&<Button onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
+            return isVoter&&<Button size="lg" onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
         default:
         }
 }

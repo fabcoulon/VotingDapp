@@ -5,8 +5,8 @@ function VotingInput() {
 
   return (
     <div>
-      <ActionInput />
-      <ActionButton />
+        <ActionInput />
+        <ActionButton />
     </div>
   );
 }

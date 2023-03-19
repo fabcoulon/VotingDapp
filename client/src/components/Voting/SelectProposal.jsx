@@ -35,7 +35,7 @@ function SelectProposal() {
   return (
     hasProposal&&<div id="selectContainer">
 
-        <Select name="proposals" id="proposals" onChange={ handleVoteChange }>
+        <Select size="lg" name="proposals" id="proposals" onChange={ handleVoteChange }>
         <option value=""> Please choose an proposal
         </option>
             {proposalEvents.map((event, index) => {

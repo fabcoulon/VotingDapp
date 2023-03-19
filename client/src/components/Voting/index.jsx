@@ -6,12 +6,12 @@ import NoticeWrongNetwork from "./NoticeWrongNetwork";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import Address from "./Address";
 import StepButton from "./StepButton";
-import VotingInput from "./VotingInput";
 import InfoGetter from "./InfoGetter";
 import { Winner } from "./Winner";
 import { Box, Heading, Flex, Link, Text, Icon, Divider, Center } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import { VotesEnded } from "./VotesEnded";
+import ActionInput from "./ActionInput";
+import ActionButton from "./ActionButton";
 
 function Voting() {
   const { state } = useEth();
@@ -20,9 +20,6 @@ function Voting() {
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
   
-
-
-
   const voting =
   <>
     <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
@@ -36,40 +33,29 @@ function Voting() {
           </Box>
         </Flex>
       </Box>
-
-
-
       <div className="contract-container">
         <div>
         <Display/>
         <Flex direction="column">
-
           <Winner/>
-
-          <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-          <Text as="b">Action Box</Text>
-            <Flex justify="space-between">
-              {workflowStatus > 4 
-              ?<Box
+          <Box maxW="inherit" h="7rem" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+          <Text as="b">Step Box</Text>
+            <Flex justify="center">
+              <Box
                 maxW="lg"
-                borderWidth="1px"
-                borderRadius="lg"
                 overflow="hidden">
                    <StepButton />  
               </Box>
-              :<Box
-                maxW="lg"
-                overflow="hidden">
-                  <VotesEnded />
-              </Box>}
-
-              <Box
-                maxW="lg"
-                borderWidth="1px"
-                borderRadius="lg"
-                overflow="hidden">
-                  <VotingInput />
-                </Box>
+            </Flex>
+          </Box>
+          <Center height='30px'>
+            <Divider orientation='vertical' />
+          </Center>
+          <Box maxW="inherit" h="7rem" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+          <Text as="b">Action Box</Text>
+            <Flex justify="center">
+                <ActionInput />
+                <ActionButton />
             </Flex>
           </Box>
           <Center height='30px'>
@@ -85,7 +71,6 @@ function Voting() {
                 overflow="hidden">
                 <InfoGetter type="voter"/>
               </Box>
-
               <Box
                 w="md"
                 maxW="md"
@@ -99,8 +84,6 @@ function Voting() {
         </Flex>
         </div>
       </div>
-
-
       <Box bg="gray.100" boxShadow="md" mt={8}  position="fixed" bottom="0" width="100%">
         <Flex direction="column" justify="center" align="center" p={4}>
           <Text color="gray.600" mb={2}>

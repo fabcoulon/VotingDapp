@@ -17,7 +17,7 @@ export function useWorkflowStep() {
     }
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    })
+    },[])
 
   useEffect(() => {
   
