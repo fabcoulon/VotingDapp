@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input, AlertDialog, AlertDialogBody, AlertDialogHeader, 
+import { Button, Input, Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
         AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import useEth from "../../contexts/EthContext/useEth";
@@ -52,14 +52,16 @@ function AlertInfoProposal() {
         >
           <AlertDialogOverlay />
   
-          <AlertDialogContent>
+          <AlertDialogContent  bg="blue.500" color="white">
             <AlertDialogHeader>Proposal Informations : </AlertDialogHeader>
             <AlertDialogCloseButton />
             <AlertDialogBody>
-            {alertMessage}
+              <Text fontSize='4xl'>
+                {alertMessage}
+              </Text>
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={onClose} color="black">
                 OK
               </Button>
             </AlertDialogFooter>

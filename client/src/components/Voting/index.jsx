@@ -6,12 +6,11 @@ import NoticeWrongNetwork from "./NoticeWrongNetwork";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import Address from "./Address";
 import StepButton from "./StepButton";
+import VotingInput from "./VotingInput";
 import InfoGetter from "./InfoGetter";
 import { Winner } from "./Winner";
 import { Box, Heading, Flex, Link, Text, Icon, Divider, Center } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import ActionInput from "./ActionInput";
-import ActionButton from "./ActionButton";
 
 function Voting() {
   const { state } = useEth();
@@ -20,6 +19,9 @@ function Voting() {
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
   
+
+
+
   const voting =
   <>
     <VotingContext.Provider value={{workflowStatus,setWorkflowStatus,proposal,setProposal,voterAddress,setVoterAddress,vote,changeVote}} >
@@ -33,47 +35,54 @@ function Voting() {
           </Box>
         </Flex>
       </Box>
+
+
+
       <div className="contract-container">
         <div>
         <Display/>
         <Flex direction="column">
+
           <Winner/>
-          <Box maxW="inherit" h="7rem" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-          <Text as="b">Step Box</Text>
-            <Flex justify="center">
+
+          <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+          <Text as="b">Action Box</Text>
+            <Flex justify="space-between">
+            
               <Box
                 maxW="lg"
+                borderWidth="1px"
+                borderRadius="lg"
                 overflow="hidden">
-                   <StepButton />  
+                  <StepButton />
               </Box>
-            </Flex>
-          </Box>
-          <Center height='30px'>
-            <Divider orientation='vertical' />
-          </Center>
-          <Box maxW="inherit" h="7rem" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-          <Text as="b">Action Box</Text>
-            <Flex justify="center">
-                <ActionInput />
-                <ActionButton />
-            </Flex>
-          </Box>
-          <Center height='30px'>
-            <Divider orientation='vertical' />
-          </Center>
-          <Box maxW="inherit" height="300" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-            <Text as="b">Information Box</Text>
-            <Flex justify="space-around" mt="8">
+
               <Box
-                w="md"
-                maxW="md"
+                maxW="lg"
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden">
+                  <VotingInput />
+                </Box>
+            </Flex>
+          </Box>
+          <Center height='30px'>
+            <Divider orientation='vertical' />
+          </Center>
+          <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+            <Text as="b">Information Box</Text>
+            <Flex justify="space-between" mt="8">
+              <Box
+                maxW="inherit"
+                borderWidth="1px"
                 borderRadius="lg"
                 overflow="hidden">
                 <InfoGetter type="voter"/>
               </Box>
+
               <Box
-                w="md"
-                maxW="md"
+                maxW="sm"
+                borderWidth="1px"
                 borderRadius="lg"
                 overflow="hidden">
 
@@ -84,14 +93,16 @@ function Voting() {
         </Flex>
         </div>
       </div>
+
+
       <Box bg="gray.100" boxShadow="md" mt={8}  position="fixed" bottom="0" width="100%">
         <Flex direction="column" justify="center" align="center" p={4}>
           <Text color="gray.600" mb={2}>
-            © 2023 My application. All rights reserved.
+            © 2023 Mon application. Tous droits réservés.
           </Text>
           <Link href="https://github.com/fabcoulon/VotingDapp" mb={2}>
             <Icon as={FaGithub} color="blue.500" mr={2} />
-            Git repository
+            Dépôt Git
           </Link>
         </Flex>
       </Box>

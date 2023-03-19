@@ -8,6 +8,14 @@ import { useHasVoted } from "../../hooks/useHasVoted";
 import { useIsProposal } from "../../hooks/useIsProposal";
 import { Button } from '@chakra-ui/react'
 
+import { useIamVoter } from "../../hooks/useIamVoter";
+import { useDisclosure } from "@chakra-ui/react";
+import React from "react";
+import { useState } from "react";
+import { Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
+  AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
+
+
 function ActionButton(){
     
 const { state: { contract, accounts,web3 } } = useEth();
@@ -17,66 +25,115 @@ const { isOwner } = useIsOwner(accounts[0]);
 
 const { workflowstep } = useWorkflowStep();
 const {isVoter} = useIsVoter(voterAddress);
+
+const { isOpen, onOpen, onClose } = useDisclosure();
+const cancelRef = React.useRef();
+const {IamVoter} = useIamVoter(accounts[0]);
+let [alertMessage,setAlertMessage] = useState("");
+
 const {hasVoted} = useHasVoted(accounts[0]);
 const {isProposal} = useIsProposal(vote);
 
 const addVoter = async () => {
-  
+  setAlertMessage("");
   if (!web3.utils.isAddress(voterAddress)) {
-    return alert("invalid address")
+    onOpen();
+    return setAlertMessage("invalid address");
   }
 
   if(isVoter) {
-    return alert("Voter already registred");
+    onOpen();
+    return setAlertMessage("Voter already registred");
   }
-
   await contract.methods.addVoter(voterAddress).send({ from: accounts[0] });
-  alert(`Voter ${voterAddress} is regitrated`);
+  onOpen();
+  setAlertMessage("Voter "+voterAddress+" is regitrated");
   setVoterAddress("");
 };
 
   const addProposal = async () => {
+    setAlertMessage("");
     if (proposal === "") {
-      return alert("No empty proposal please.");
+      onOpen();
+      return setAlertMessage("No empty proposal please.");
 
     }
-     if (!isVoter) {
-      return alert("You are not registred as voter.");
+    if (!IamVoter) {
+      onOpen();
+      return setAlertMessage("You are not registred as voter.");
 
     }
     await contract.methods.addProposal(proposal).send({ from: accounts[0] });
-    alert(`Proposal ${proposal} is registred`);
+    onOpen();
+    setAlertMessage("Proposal "+proposal+" is regitrated");
     setProposal("");
   };
 
   const setVote = async () => {
-    if (!isVoter) {
-      return alert("You are not registred as voter.");
+    setAlertMessage("");
 
+    if (!IamVoter) {
+      onOpen();
+      return setAlertMessage("You are not registred as voter.");
     }
 
     if(hasVoted){
-      return alert("You have already voted");
+      onOpen();
+      return setAlertMessage("You have already voted");
 
     }
     else if(!isProposal) {
-      return alert("Proposal not found");
+      onOpen();
+      return setAlertMessage("Proposal not found");
     } 
   const value = web3.utils.toBN(parseInt(vote));
-    await contract.methods.setVote(value).send({ from: accounts[0] });
-    alert(`${accounts[0]} has just voted for proposal ${value}`);
+  await contract.methods.setVote(value).send({ from: accounts[0] });
+  onOpen();
+  setAlertMessage(accounts[0]+" has just voted for proposal "+value);
   };
 
-switch (parseInt(workflowstep)) {
-        case 0:
-            return isOwner&&<Button size="lg" onClick={addVoter} colorScheme='blue'>Add voter</Button>
-        case 1:
-            return isOwner ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> 
-            : isVoter ? <Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button> : <></>                 
-        case 3:
-            return isVoter&&<Button size="lg" onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
-        default:
-        }
+
+  return (
+    <>
+      <AlertDialog
+        motionPreset='slideInBottom'
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
+        <AlertDialogOverlay />
+
+        <AlertDialogContent  bg="blue.500" color="white">
+          <AlertDialogHeader>Message : </AlertDialogHeader>
+          <AlertDialogCloseButton />
+          <AlertDialogBody>
+            <Text fontSize='4xl'>
+              {alertMessage}
+            </Text>
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose} color="black">
+              OK
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      {
+        (() => {
+        switch (parseInt(workflowstep)) {
+          case 0:
+              return isOwner&&<Button size="lg" onClick={addVoter} colorScheme='blue'>Add voter</Button>          
+          case 1:
+            return IamVoter &&<Button size="lg" onClick={addProposal} colorScheme='blue'>Add proposal</Button>             
+          case 3:
+            return IamVoter&&<Button size="lg" onClick={setVote} colorScheme='blue'>Vote for proposal</Button>
+          default:
+          }
+        })()
+      }
+    </>
+  )
 }
 
 export default ActionButton;

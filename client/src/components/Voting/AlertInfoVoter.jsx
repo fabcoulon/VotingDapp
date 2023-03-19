@@ -56,7 +56,7 @@ function AlertInfoVoter() {
           size="6xl"
         >
           <AlertDialogOverlay />
-          <AlertDialogContent bg="red.500" color="white" >
+          <AlertDialogContent bg="blue.500" color="white" >
             <AlertDialogHeader>Voter Informations : </AlertDialogHeader>
             <AlertDialogBody>
               <Text fontSize='4xl'>
