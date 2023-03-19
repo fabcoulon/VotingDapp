@@ -98,6 +98,7 @@ hr {
 #App .container .voting .contract-container {
   display: flex;
   justify-content: space-around;
+  margin:10rem;
 }
 
 #App .container .voting .contract-container p{
@@ -159,4 +160,12 @@ hr {
 
 #selectContainer{
   display: inline-block;
+}
+
+.winningProposal{
+  color:rgb(250, 142, 4);
+}
+
+.votesEnded{
+  color:rgba(200, 7, 7, 0.800);
 }

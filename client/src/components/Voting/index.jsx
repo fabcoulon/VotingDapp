@@ -11,6 +11,7 @@ import InfoGetter from "./InfoGetter";
 import { Winner } from "./Winner";
 import { Box, Heading, Flex, Link, Text, Icon, Divider, Center } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
+import { VotesEnded } from "./VotesEnded";
 
 function Voting() {
   const { state } = useEth();
@@ -48,14 +49,19 @@ function Voting() {
           <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
           <Text as="b">Action Box</Text>
             <Flex justify="space-between">
-            
-              <Box
+              {workflowStatus > 4 
+              ?<Box
                 maxW="lg"
                 borderWidth="1px"
                 borderRadius="lg"
                 overflow="hidden">
-                  <StepButton />
+                   <StepButton />  
               </Box>
+              :<Box
+                maxW="lg"
+                overflow="hidden">
+                  <VotesEnded />
+              </Box>}
 
               <Box
                 maxW="lg"
@@ -69,20 +75,20 @@ function Voting() {
           <Center height='30px'>
             <Divider orientation='vertical' />
           </Center>
-          <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
+          <Box maxW="inherit" height="300" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
             <Text as="b">Information Box</Text>
-            <Flex justify="space-between" mt="8">
+            <Flex justify="space-around" mt="8">
               <Box
-                maxW="inherit"
-                borderWidth="1px"
+                w="md"
+                maxW="md"
                 borderRadius="lg"
                 overflow="hidden">
                 <InfoGetter type="voter"/>
               </Box>
 
               <Box
-                maxW="sm"
-                borderWidth="1px"
+                w="md"
+                maxW="md"
                 borderRadius="lg"
                 overflow="hidden">
 

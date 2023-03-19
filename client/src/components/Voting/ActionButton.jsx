@@ -16,7 +16,7 @@ let {proposal,setProposal,voterAddress,setVoterAddress,vote} = useContext(Voting
 const { isOwner } = useIsOwner(accounts[0]);
 
 const { workflowstep } = useWorkflowStep();
-const {isVoter} = useIsVoter(voterAddress);
+const {isVoter} = useIsVoter(accounts[0]);
 const {hasVoted} = useHasVoted(accounts[0]);
 const {isProposal} = useIsProposal(vote);
 

@@ -43,7 +43,7 @@ function AlertInfoVoter() {
     return (
       <>
         <Input size="lg" borderWidth="1px" type="text" placeholder="address" value={address} onInput={handleAddressChange} />
-        <Button onClick={getVoter} colorScheme='blue'>
+        <Button size="lg" mt="2rem" onClick={getVoter} colorScheme='blue'>
           get voter
         </Button> 
 

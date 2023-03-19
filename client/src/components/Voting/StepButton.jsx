@@ -52,8 +52,6 @@ switch (parseInt(workflowstep)) {
             return isOwner&&<Button colorScheme='blue' onClick={endVotingSession}>endVotingSession()</Button>;
         case 4:
             return isOwner&&<Button colorScheme='blue' onClick={tallyVotes}>tallyVotes()</Button>;
-        case 5:
-            return <p>Votes ended</p>;
         default:
             return <p>Step unknow</p>;
         }

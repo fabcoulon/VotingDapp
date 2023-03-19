@@ -19775,12 +19775,18 @@
         }
       },
       "links": {},
-      "address": "0xA8992B9000A202B74ee16981Ce388F5311830aF6",
-      "transactionHash": "0x851a99b3310d6020dd64eca68a6a059a1dafb046351171058cf7aa993d80242a"
+      "address": "0x67F6af8C4AAffe378abEA0B7AbE404aAB33C0584",
+      "transactionHash": "0x999e53bef7cb668756a06c6f940a1c1cc7775df63b986916a7889ed0481ab592"
+    },
+    "1679179359266": {
+      "events": {},
+      "links": {},
+      "address": "0x1FFf98431851978632520f630C7926E896fa2FB8",
+      "transactionHash": "0xa8e3d62f87ab84830ad8757782b04dcde841ed3ec463112e5dafdc4838df7925"
     }
   },
   "schemaVersion": "3.4.11",
-  "updatedAt": "2023-03-18T22:24:56.640Z",
+  "updatedAt": "2023-03-18T22:43:04.631Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "Cyril Castagnet",

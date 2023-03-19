@@ -2,7 +2,7 @@ import useEth from '../../contexts/EthContext/useEth';
 import { useState, useContext, useEffect } from 'react';
 import { useWorkflowStep } from '../../hooks/useWorkflowStep';
 import { VotingContext } from '../../contexts/VotingContext/VotingContext';
-import { Box, Text, Divider, Center } from "@chakra-ui/react";
+import { Box, Text, Divider, Center, AbsoluteCenter } from "@chakra-ui/react";
 
 export function Winner() {
 
@@ -27,9 +27,11 @@ export function Winner() {
   
   const winnerBox = 
   <>
-  <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
-  <Text as="b">The winning proposal is : </Text>{ winningProposal }
-  </Box>
+    <Box position='relative' width="100%" maxW="inherit" borderWidth="1px" h='100px' borderRadius="lg" overflow="hidden" boxShadow="md">
+      <AbsoluteCenter>
+        <Text as="b" h='100px' >The winning proposal is : <span class="winningProposal">{ winningProposal }</span></Text>
+      </AbsoluteCenter>
+    </Box>
   <Center height='30px'>
     <Divider orientation='vertical' />
   </Center>

@@ -62,11 +62,11 @@ const getOneProposal = async () => {
   return (
         (type === "voter") ?(
             (hasVoter && isVoter) ? (<div>   
-            <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" align="center">
-                <InfoIcon w={50} h={50} color="blue.500" />
+            <Box w="inherit" h="20rem" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" align="center">
+                <InfoIcon pt={3} w={50} h={50} color="blue.500" />
 
                 <Box p="6">
-                    <Text fontWeight="bold" fontSize="2xl">
+                    <Text fontWeight="bold" fontSize="14">
                     Get the voter informations
                     </Text>
                     <AlertInfoVoter />
@@ -76,11 +76,11 @@ const getOneProposal = async () => {
         ):
         ( 
             workflowstep && workflowstep > 0 && hasProposal && isVoter ? (<div>
-             <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" align="center">
+             <Box w="inherit" h="20rem" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md" align="center">
                 <ViewIcon w={50} h={50} color="blue.500" />
 
                 <Box p="6">
-                    <Text fontWeight="bold" fontSize="2xl">
+                    <Text fontWeight="bold" fontSize="14">
                     Get the proposal informations
                     </Text>
                     <AlertInfoProposal />

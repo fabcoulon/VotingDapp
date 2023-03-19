@@ -39,7 +39,7 @@ function AlertInfoProposal() {
     return (
       <>
         <Input size="lg" borderWidth="1px" type="text" placeholder="Proposal" value={proposal} onChange={handleProposalChange}/>
-        <Button onClick={getOneProposal} colorScheme='blue'>
+        <Button mt="2rem" size="lg" onClick={getOneProposal} colorScheme='blue'>
             get one propoal
         </Button> 
 
