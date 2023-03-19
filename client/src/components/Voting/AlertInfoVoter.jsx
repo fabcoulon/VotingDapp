@@ -30,10 +30,10 @@ function AlertInfoVoter() {
       } else {
         contract.methods.getVoter(address).call({ from: accounts[0] })
           .then(function(voter) {
-            //setAlertMessage(voter);
             setAlertMessage((voter.isRegistered && "This voter is registrated")
              +  (voter.hasVoted ? "and has voted for " + voter.votedProposalId 
              : " but has not voted yet"));
+             setAddress("");
           })
           .catch(function(error) {
             console.log(error);
@@ -60,7 +60,7 @@ function AlertInfoVoter() {
             <AlertDialogHeader>Voter Informations : </AlertDialogHeader>
             <AlertDialogBody>
               <Text fontSize='4xl'>
-              < WarningTwoIcon boxSize={6}/> {alertMessage}
+                {alertMessage}
               </Text>
             </AlertDialogBody>
             <AlertDialogFooter>

@@ -4,7 +4,6 @@ import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { useWorkflowStep } from "../../hooks/useWorkflowStep";
 import { useHasVoter } from "../../hooks/useHasVoter";
 import { useHasProposal } from "../../hooks/useHasProposal";
-//import { useIsProposal } from "../../hooks/useIsProposal";
 import { useIsVoter } from "../../hooks/useIsVoter";
 import { Box, Text } from "@chakra-ui/react";
 import { InfoIcon, ViewIcon } from '@chakra-ui/icons'
@@ -13,51 +12,15 @@ import AlertInfoProposal from "./AlertInfoProposal";
 
 function InfoGetter({type}) {
 
-//const { state: { contract, accounts,web3 } } = useEth();
 const { state: { accounts } } = useEth();
 const {voterAddress} =  useContext(VotingContext);
 
-//const [address,setAddress] = useState("");
-//const [proposal,setProposal] = useState("");
 const {proposal} = useState("");
 
 const { workflowstep } = useWorkflowStep();
 const { hasVoter } = useHasVoter(voterAddress);
 const { hasProposal } = useHasProposal(proposal);
-//const { isProposal } = useIsProposal(proposal);
 const {isVoter} =  useIsVoter(accounts[0]);
-
-/*
-const getVoter = async (e) => {
-
-    if (!web3.utils.isAddress(address)) {
-        alert("invalid address")
-    }
-    if(!isVoter)
-    {
-        alert("Voter does not exists");
-    }
-    alert(await contract.methods.getVoter(address).call({ from: accounts[0] }));
-};*/
-
-
-/*
-const handleProposalChange = e => {
-    if (/^\d+$|^$/.test(e.target.value)) {
-    setProposal(e.target.value);
-    }
-};
-
-const getOneProposal = async () => {
-
-    if(!isProposal) {
-    alert("Proposal not found");
-    return setProposal("");
-    } 
-    const value = web3.utils.toBN(parseInt(proposal));
-    alert(await contract.methods.getOneProposal(value).call({ from: accounts[0] }));
-    setProposal("");
-};*/
 
   return (
         (type === "voter") ?(
@@ -67,7 +30,7 @@ const getOneProposal = async () => {
 
                 <Box p="6">
                     <Text fontWeight="bold" fontSize="14">
-                    Get the voter informations
+                    Get voter informations
                     </Text>
                     <AlertInfoVoter />
                 </Box>
@@ -81,14 +44,11 @@ const getOneProposal = async () => {
 
                 <Box p="6">
                     <Text fontWeight="bold" fontSize="14">
-                    Get the proposal informations
+                    Get proposal informations
                     </Text>
                     <AlertInfoProposal />
                 </Box>
             </Box>
-
-
-
         </div>) : <></>     
         )
     )

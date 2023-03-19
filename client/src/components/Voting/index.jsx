@@ -18,9 +18,6 @@ function Voting() {
   const [proposal, setProposal] = useState("");
   const [voterAddress, setVoterAddress] = useState("");
   const [vote, changeVote] = useState("");
-  
-
-
 
   const voting =
   <>
@@ -35,28 +32,20 @@ function Voting() {
           </Box>
         </Flex>
       </Box>
-
-
-
       <div className="contract-container">
         <div>
         <Display/>
         <Flex direction="column">
-
           <Winner/>
-
           <Box maxW="inherit" borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="md">
           <Text as="b">Action Box</Text>
-            <Flex justify="space-between">
-            
+            <Flex justify="space-between">       
               <Box
                 maxW="lg"
-                borderWidth="1px"
                 borderRadius="lg"
                 overflow="hidden">
                   <StepButton />
               </Box>
-
               <Box
                 maxW="lg"
                 borderWidth="1px"
@@ -79,13 +68,11 @@ function Voting() {
                 overflow="hidden">
                 <InfoGetter type="voter"/>
               </Box>
-
               <Box
                 maxW="sm"
                 borderWidth="1px"
                 borderRadius="lg"
                 overflow="hidden">
-
                 <InfoGetter type="proposal"/>
               </Box>
              </Flex>
@@ -106,7 +93,6 @@ function Voting() {
           </Link>
         </Flex>
       </Box>
-
       </VotingContext.Provider>
     </>
     ;

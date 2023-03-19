@@ -101,10 +101,11 @@ const addVoter = async () => {
         onClose={onClose}
         isOpen={isOpen}
         isCentered
+        size="4xl"
       >
         <AlertDialogOverlay />
 
-        <AlertDialogContent  bg="blue.500" color="white">
+        <AlertDialogContent bg="blue.500" color="white">
           <AlertDialogHeader>Message : </AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
