@@ -16,12 +16,12 @@ let {proposal,setProposal,voterAddress,setVoterAddress,vote} = useContext(Voting
 const { isOwner } = useIsOwner(accounts[0]);
 
 const { workflowstep } = useWorkflowStep();
-const {isVoter} = useIsVoter(accounts[0]);
+const {isVoter} = useIsVoter(voterAddress);
 const {hasVoted} = useHasVoted(accounts[0]);
 const {isProposal} = useIsProposal(vote);
 
 const addVoter = async () => {
-
+  
   if (!web3.utils.isAddress(voterAddress)) {
     return alert("invalid address")
   }

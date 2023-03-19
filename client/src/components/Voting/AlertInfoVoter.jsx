@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Input, Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
-        AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
+        AlertDialogContent, AlertDialogOverlay, AlertDialogFooter } from "@chakra-ui/react";
+import { WarningTwoIcon } from '@chakra-ui/icons'
 import { useDisclosure } from "@chakra-ui/react";
 import { useIsVoter } from "../../hooks/useIsVoter";
 import useEth from "../../contexts/EthContext/useEth";
@@ -21,19 +22,18 @@ function AlertInfoVoter() {
 
     const getVoter = async (e) => {
       onOpen();
-      /*if (alertMessage.length === 0) { 
-        setAlertMessage("The input is empty");
-      } */
        if (!(await web3.utils.isAddress(address))) {
-        setAlertMessage("The address is Invalid. ");
+        setAlertMessage(`The address ${address} is Invalid. `);
+        setAddress("");
       } else if (!isVoter) {
         setAlertMessage("The voter does not exists.");
       } else {
         contract.methods.getVoter(address).call({ from: accounts[0] })
           .then(function(voter) {
             //setAlertMessage(voter);
-            setAlertMessage(" isRegistered : "+voter.isRegistered+"\n hasVoted : "+voter.hasVoted
-                            + "\n\r votedProposalId : "+voter.votedProposalId);
+            setAlertMessage((voter.isRegistered && "This voter is registrated")
+             +  (voter.hasVoted ? "and has voted for " + voter.votedProposalId 
+             : " but has not voted yet"));
           })
           .catch(function(error) {
             console.log(error);
@@ -53,18 +53,18 @@ function AlertInfoVoter() {
           onClose={onClose}
           isOpen={isOpen}
           isCentered
+          size="6xl"
         >
           <AlertDialogOverlay />
-          <AlertDialogContent>
+          <AlertDialogContent bg="red.500" color="white" >
             <AlertDialogHeader>Voter Informations : </AlertDialogHeader>
-            <AlertDialogCloseButton />
             <AlertDialogBody>
-              <Text>
-              {alertMessage}
+              <Text fontSize='4xl'>
+              < WarningTwoIcon boxSize={6}/> {alertMessage}
               </Text>
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
+              <Button ref={cancelRef} onClick={onClose} color="black">
                 OK
               </Button>
             </AlertDialogFooter>
