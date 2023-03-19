@@ -31,7 +31,7 @@ function AlertInfoVoter() {
         contract.methods.getVoter(address).call({ from: accounts[0] })
           .then(function(voter) {
             setAlertMessage((voter.isRegistered && "This voter is registrated")
-             +  (voter.hasVoted ? "and has voted for " + voter.votedProposalId 
+             +  (voter.hasVoted ? " and has voted for proposal " + voter.votedProposalId 
              : " but has not voted yet"));
              setAddress("");
           })
