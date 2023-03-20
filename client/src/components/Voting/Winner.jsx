@@ -3,11 +3,13 @@ import { useState, useContext, useEffect } from 'react';
 import { useWorkflowStep } from '../../hooks/useWorkflowStep';
 import { VotingContext } from '../../contexts/VotingContext/VotingContext';
 import { Box, Text, Divider, Center, AbsoluteCenter } from "@chakra-ui/react";
+import { useIamVoter } from '../../hooks/useIamVoter';
 
 export function Winner() {
 
   const { state: { contract,accounts } } = useEth();
   const { workflowstep } = useWorkflowStep();
+  const {IamVoter} = useIamVoter(accounts[0]);
   const [winningProposal,setWinningProposal] = useState("");
   const [voteCount,setVoteCount] = useState("");
   let {vote} = useContext(VotingContext);
@@ -29,14 +31,14 @@ export function Winner() {
   
   const winnerBox = 
   <>
-    <Box position='relative' width="100%" maxW="inherit" borderWidth="1px" h='100px' borderRadius="lg" overflow="hidden" boxShadow="md">
+     {IamVoter &&<Box position='relative' width="100%" maxW="inherit" borderWidth="1px" h='100px' borderRadius="lg" overflow="hidden" boxShadow="md">
       <AbsoluteCenter>
-        <Text as="b" h='100px' >The winning proposal is : <span className="winningProposal">{ winningProposal }</span> with <span className="winningProposal">{ voteCount }</span> { voteCount > 1 ? "votes" : "vote"}</Text>
+      <Text as="b" h='100px' >The winning proposal is : <span className="winningProposal">{ winningProposal }</span> with <span className="winningProposal">{ voteCount }</span> { voteCount > 1 ? "votes" : "vote"}</Text>
       </AbsoluteCenter>
-    </Box>
+    </Box> }
   <Center height='30px'>
     <Divider orientation='vertical' />
-  </Center>
+  </Center> 
   </>;
    return workflowstep > 4 && winnerBox
    
