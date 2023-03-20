@@ -1,5 +1,5 @@
 import useEth from "../../contexts/EthContext/useEth";
-import { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { VotingContext } from "../../contexts/VotingContext/VotingContext";
 import { useIsOwner } from "../../hooks/useIsOwner";
 import { useWorkflowStep } from "../../hooks/useWorkflowStep";
@@ -10,8 +10,6 @@ import { Button } from '@chakra-ui/react'
 
 import { useIamVoter } from "../../hooks/useIamVoter";
 import { useDisclosure } from "@chakra-ui/react";
-import React from "react";
-import { useState } from "react";
 import { Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
   AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
 

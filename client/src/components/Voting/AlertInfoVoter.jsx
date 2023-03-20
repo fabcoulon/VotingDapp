@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input, Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
         AlertDialogContent, AlertDialogOverlay, AlertDialogFooter } from "@chakra-ui/react";
-import { WarningTwoIcon } from '@chakra-ui/icons'
 import { useDisclosure } from "@chakra-ui/react";
 import { useIsVoter } from "../../hooks/useIsVoter";
 import useEth from "../../contexts/EthContext/useEth";
-import { useState } from "react";
-
 
 function AlertInfoVoter() {
     const { isOpen, onOpen, onClose } = useDisclosure();

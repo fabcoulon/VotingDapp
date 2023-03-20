@@ -47,7 +47,7 @@ const workflowstepInt = parseInt(workflowstep);
 
             <BreadcrumbItem>
               <BreadcrumbLink className="no-underline" color={workflowstepInt===5 ? " blue.500" : "gray.200"} textTransform={workflowstepInt===5 && "uppercase" }>
-                {workflowstep < 5 ? <span >The tally is over</span> : <span class="votesEnded">The tally is over</span>}
+                {workflowstep < 5 ? <span >The tally is over</span> : <span className="votesEnded">The tally is over</span>}
               </BreadcrumbLink>
             </BreadcrumbItem>
           </Breadcrumb>

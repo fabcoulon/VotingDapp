@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input, Text, AlertDialog, AlertDialogBody, AlertDialogHeader, 
         AlertDialogContent, AlertDialogOverlay, AlertDialogCloseButton, AlertDialogFooter } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import useEth from "../../contexts/EthContext/useEth";
-import { useState } from "react";
 import { useIsProposal } from "../../hooks/useIsProposal";
 
 function AlertInfoProposal() {

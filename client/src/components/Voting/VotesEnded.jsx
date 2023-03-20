@@ -7,7 +7,7 @@ export function VotesEnded() {
   
   const endedVote = 
   <>
-  <Text as="b" class="votesEnded">Votes ended</Text>
+  <Text as="b" className="votesEnded">Votes ended</Text>
   </>;
    return workflowstep > 4 && endedVote
   }
