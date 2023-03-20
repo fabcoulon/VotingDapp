@@ -31,7 +31,7 @@ export function Winner() {
   <>
     <Box position='relative' width="100%" maxW="inherit" borderWidth="1px" h='100px' borderRadius="lg" overflow="hidden" boxShadow="md">
       <AbsoluteCenter>
-        <Text as="b" h='100px' >The winning proposal is : <span className="winningProposal">{ winningProposal }</span> with <span className="winningProposal">{ voteCount }</span> votes</Text>
+        <Text as="b" h='100px' >The winning proposal is : <span className="winningProposal">{ winningProposal }</span> with <span className="winningProposal">{ voteCount }</span> { voteCount > 1 ? "votes" : "vote"}</Text>
       </AbsoluteCenter>
     </Box>
   <Center height='30px'>

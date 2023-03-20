@@ -24,7 +24,7 @@ A list of technologies and libraries used within the project:
 Here are the link for deployment on Vercel and Loom presentation video
 
 - [Vercel deployment](https://voting-dapp-six.vercel.app/)
-
+- [Loom video](https://www.loom.com/share/eace18100da348fcb255316f4f01bc74/)
 
 ## Installation
 ***
